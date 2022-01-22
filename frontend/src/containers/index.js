@@ -1,0 +1,7 @@
+export { default as Footer} from './footer/Footer'
+export { default as Header} from './header/Header'
+export { default as SliceIntro} from './sliceintro/SliceIntro'
+export { default as SliceGallery} from './slicegallery/SliceGallery'
+export { default as SliceOrder} from './sliceorder/SliceOrder'
+export { default as StoryContent} from './storycontent/StoryContent'
+export { default as MenuContent} from './menucontent/MenuContent'
