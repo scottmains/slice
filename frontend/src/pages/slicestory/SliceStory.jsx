@@ -4,6 +4,9 @@ import { Navbar} from '../../components'
 import { Footer} from '../../containers'
 import { StoryContent } from '../../containers';
 
+
+
+
 const SliceStory = () => {
  
   return  (

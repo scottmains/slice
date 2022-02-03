@@ -6,6 +6,8 @@ import { useNavigate } from 'react-router-dom';
 import MenuContent from '../../containers/menucontent/MenuContent';
 import { SliceOrder } from '../../containers';
 
+
+
 const SliceMenu = () => {
   
   const navigate = useNavigate();

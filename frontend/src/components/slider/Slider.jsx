@@ -5,6 +5,8 @@ import Carousel1 from '../../assets/Gallery11.jpg'
 import Carousel2 from '../../assets/Gallery49.jpg'
 import Carousel3 from '../../assets/Gallery73.jpg'
 import Carousel4 from '../../assets/Gallery96.jpg'
+import Carousel5 from '../../assets/Neopolitan1.jpg'
+import Carousel6 from '../../assets/Neopolitan2.jpg'
 
 
   const Slider = (props) =>  {
@@ -50,9 +52,10 @@ import Carousel4 from '../../assets/Gallery96.jpg'
       dotListClass="custom-dot-list-style"
       itemClass="carousel-item-padding-40-px">
       <div className = "slice__slider_carousel-image"><img src={Carousel1} alt="pizza"/></div>
-      <div className = "slice__slider_carousel-image"><img src={Carousel2} alt="pizza"/></div>
+      <div className = "slice__slider_carousel-image"><img src={Carousel5} alt="pizza"/></div>
       <div className = "slice__slider_carousel-image"><img src={Carousel3} alt="pizza"/></div>
-      <div className = "slice__slider_carousel-image"><img src={Carousel4} alt="pizza"/></div>
+      <div className = "slice__slider_carousel-image"><img src={Carousel6} alt="pizza"/></div>
+      <div className = "slice__slider_carousel-image"><img src={Carousel2} alt="pizza"/></div>
       </Carousel>
       </div>
     

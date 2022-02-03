@@ -1,7 +1,7 @@
 import React from 'react';
 import './storycontent.css'
 import Fade from 'react-reveal/Fade';
-
+import LightSpeed from 'react-reveal/LightSpeed';
 import VenueImage1 from '../../assets/venue-image1.jpg'
 import VenueImage2 from '../../assets/venue-image2.jpg'
 
@@ -10,12 +10,12 @@ const StoryContent = () => {
     
   <div className="slice__story-content section__padding ">
       <div className="slice__story-top">
-      <Fade>
+      <LightSpeed>
         <div className="slice__story-image1">
         <img src={VenueImage1} alt="slice venue"></img>
         </div>
-        </Fade>
-        <Fade>
+       
+        
     <div className="slice__story-text"> 
       <h1> Our Story </h1>
       <p> We're a fresh pizza gaff started from a passion of home-made pizzamaking.
@@ -24,12 +24,12 @@ const StoryContent = () => {
           our newly furbished venue on bakers street and try it for yourself!
       </p>
     </div>
-    </Fade>
-    <Fade>
+   
+   
     <div className="slice__story-image2">
     <img src={VenueImage2} alt="slice venue"></img>   
     </div>
-    </Fade>
+    </LightSpeed>
 </div>
 </div>
 

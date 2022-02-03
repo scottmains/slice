@@ -20,6 +20,7 @@ const Footer = () => {
        <h4><FaPhone /> 07780 600224 </h4> 
             <h4><FaMailBulk /> slice.boro@gmail.com </h4>
             <h4> 25 Bedford St, Middlesbrough TS1 2LL </h4>
+            <h4> 7 Leven Rd, Norton, Stockton-on-Tees TS20 1BQ </h4>
          </div>
          <div className="slice__footer-links_div">
             <h3> OPENING TIMES </h3>

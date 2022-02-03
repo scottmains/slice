@@ -3,6 +3,7 @@ import { Slider } from '../../components';
 import './slicegallery.css'
 import Fade from 'react-reveal/Fade';
 import {FaPizzaSlice} from  'react-icons/fa';
+import { NavLink} from "react-router-dom";
 
 
 const SliceGallery = () => {
@@ -18,8 +19,10 @@ const SliceGallery = () => {
       <h1> Fancy a slice?</h1>
       </div>
         <Slider />
-      <a href="/menu">  <h2> OUR MENU </h2> </a>
+        <NavLink to ="/menu"> 
+        <h2> OUR MENU </h2>
         <FaPizzaSlice className="slice__gallery-pizzaicon"/>
+        </NavLink> 
     </Fade>
   </div>
   
