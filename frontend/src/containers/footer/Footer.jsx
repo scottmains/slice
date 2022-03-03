@@ -1,6 +1,6 @@
 import React from 'react';
 import './footer.css';
-import slicelogo from '../../assets/nav-logo.png';
+import slicelogo from '../../assets/LOGOS-05.png';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faFacebook } from "@fortawesome/free-brands-svg-icons"
 import { faInstagram } from "@fortawesome/free-brands-svg-icons"
@@ -28,7 +28,7 @@ const Footer = () => {
             <h4> SUNDAY: 5-9:30PM</h4>
          </div>
          <div className="slice__footer-links_div">
-            <h3> Come look at our food: </h3>
+            <h3> OUR SOCIALS: </h3>
             <div className="slice__footer-links_social">
             <div className="slice__footer-facebookicon" >
           <FontAwesomeIcon icon={faFacebook} />

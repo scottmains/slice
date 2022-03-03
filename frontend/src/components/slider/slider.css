@@ -4,13 +4,16 @@
     margin: 0 auto;
 }
 
+.slice__slider_carousel-image {
+    
+}
+
 
 .slice__slider_carousel-image img {
 
     width: 500px;
     height: 500px;
-    border: 5px solid black
- 
+    border-image: linear-gradient( #fdbb2d, #b21f1f) 30;
 }
 
 .carousel-item-padding-40-px{

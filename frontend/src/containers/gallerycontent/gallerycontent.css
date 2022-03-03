@@ -1,0 +1,67 @@
+.slice__gallery {
+    margin: 0 auto;
+    text-align: center;
+    width: 100%;
+}
+
+
+.slice__gallery-header {
+    font-family: var(--font-title);
+    text-align: center;
+    font-size: 30px;
+}
+
+
+.slice__gallery h2 {
+
+    text-align: center;
+    font-family: var(--font-title);
+    font-weight: 800;
+    font-size: 40px;
+    line-height: 60px;
+    padding-top: 5rem;
+    }
+
+    .slice__gallery-pizzaicon{
+        font-size: 30px;
+    }
+
+
+
+
+@media screen and (max-width: 1050px) {
+
+  
+
+}
+
+@media screen and (max-width: 650px) {
+
+ 
+ 
+}
+
+@media screen and (max-width: 490px) {
+
+    .slice__gallery-header {
+        width: 100%;
+        font-size: 25px;
+        padding-bottom: 30px;
+        
+    }
+
+    .slice__gallery h2 {
+
+        font-size: 40px;
+        
+        }
+    
+    .slice__gallery img {
+        margin: 0 auto;
+    }
+    
+
+    
+
+   
+}

@@ -8,16 +8,16 @@ import VenueImage2 from '../../assets/venue-image2.jpg'
 const StoryContent = () => {
   return  (
     
-  <div className="slice__story-content section__padding ">
+  <div className="slice__story-content section__padding">
       <div className="slice__story-top">
-      <LightSpeed>
+      <Fade>
         <div className="slice__story-image1">
         <img src={VenueImage1} alt="slice venue"></img>
         </div>
        
         
     <div className="slice__story-text"> 
-      <h1> Our Story </h1>
+      <h1> OUR STORY </h1>
       <p> We're a fresh pizza gaff started from a passion of home-made pizzamaking.
           Since lockdown started, we got our first pizza oven and ever since then we've 
           been addicted to making the best pizzas you'll ever taste. Don't believe us? come to 
@@ -29,7 +29,7 @@ const StoryContent = () => {
     <div className="slice__story-image2">
     <img src={VenueImage2} alt="slice venue"></img>   
     </div>
-    </LightSpeed>
+    </Fade>
 </div>
 </div>
 

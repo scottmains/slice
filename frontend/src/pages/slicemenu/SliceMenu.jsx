@@ -4,7 +4,7 @@ import { Navbar} from '../../components'
 import { Footer} from '../../containers'
 import { useNavigate } from 'react-router-dom';
 import MenuContent from '../../containers/menucontent/MenuContent';
-import { SliceOrder } from '../../containers';
+import { OrderContent } from '../../containers';
 
 
 
@@ -23,7 +23,7 @@ const SliceMenu = () => {
         <div className="gradient__bg"> 
         <Navbar onClick={handleClick}/>
         <MenuContent />
-        <SliceOrder />
+        <OrderContent />
     <Footer />
     </div>
     </div>

@@ -1,0 +1,68 @@
+
+
+.slice__login-box {
+    width: 500px;
+    display: flex;
+    flex-direction: column;
+    padding: 2em 1em;
+    background-color: #fff;
+    border: 3px solid #ee840a;
+    border-radius: 10px;
+    box-shadow: 0 10px 6px #00000029;
+    margin: 0 auto;
+    }
+
+    input{
+        width: 60%;
+        height: 40px;
+        background: #e0dede;
+        justify-content: center;
+        display: flex;
+        margin: 20px auto;
+        padding: 10px;
+        border: none;
+        outline: none;
+        border-radius: 5px;
+    }
+    
+    .slice__login-box button{
+        width: 60%;
+        height: 40px;
+        margin: 10px auto;
+        justify-content: center;
+        display: block;
+        color: #fff;
+        background: #f87b05;
+        font-size: 1em;
+        font-weight: bold;
+        margin-top: 20px;
+        outline: none;
+        border: none;
+        border-radius: 5px;
+        transition: .2s ease-in;
+        cursor: pointer;
+    }
+    button:hover{
+        background: #6d44b8;
+    }
+
+    .slice__login-box h1 {
+
+        color: black;
+        font-family: var(--font-family);
+        text-shadow: none;
+        text-align: center;
+
+    }
+
+    .slice__create-account{
+        text-align: center;
+    }
+
+    .slice__create-account p {
+        color: black
+    }
+
+    .slice__create-account a {
+        text-decoration: none;
+    }

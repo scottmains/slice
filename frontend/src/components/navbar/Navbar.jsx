@@ -14,8 +14,7 @@ const Menu = () => (
   <p><NavLink to ="/"> Home </NavLink></p>
   <p><NavLink to ="/menu"> Our Menu</NavLink></p>
   <p><NavLink to ="/our-story"> Our Story </NavLink></p>
-  <p><a href="https://www.ubereats.com/gb/store/slice-boro/7uGrAMUDWNqrF_2t-x90yw?utm_source=google&utm_medium=organic&utm_campaign=place-action-link"> Order Now </a></p>
-
+  <p><NavLink to ="/user-dashboard"> Login </NavLink></p>
  
   </>
 )

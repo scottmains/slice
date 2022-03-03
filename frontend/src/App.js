@@ -1,6 +1,6 @@
 import React from 'react';
 import { useState, useEffect } from 'react';
-import { SliceHome,SliceMenu, SliceStory, NotFound} from './pages'
+import { SliceHome,SliceMenu, SliceStory, NotFound, SliceBooking, SliceUserDashboard, SliceSignUp} from './pages'
 import './App.css'
 import "react-loader-spinner/dist/loader/css/react-spinner-loader.css";
 import {ScrollToTop} from './components'
@@ -24,8 +24,6 @@ const App = () => {
 
   return (
 
-     
-      
 
     <Router>
      <ScrollToTop/>
@@ -35,6 +33,9 @@ const App = () => {
         <Route exact path='/' index element={<SliceHome/>}/>
         <Route path='/our-story' element={<SliceStory/>}/>
         <Route  path='/menu' element={<SliceMenu/>}/>
+        <Route  path='/book' element={<SliceBooking/>}/>
+        <Route  path='/user-dashboard' element={<SliceUserDashboard/>}/>
+        <Route  path='/sign-up' element={<SliceSignUp/>}/>
         <Route path='*' element={<p><NotFound/></p>}/>
      
       </Routes>

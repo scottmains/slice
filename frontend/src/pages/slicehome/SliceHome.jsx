@@ -1,4 +1,4 @@
-import { Footer, Header, SliceGallery, SliceOrder, SliceIntro} from '../../containers'
+import { Footer, HeaderContent, GalleryContent, OrderContent, IntroContent} from '../../containers'
 import { Navbar} from '../../components'
 
 
@@ -6,16 +6,17 @@ const SliceHome = () => {
   
     return  (
       <div className="home">
-        <div className="header__bg"> 
+        <div className="gradient__bg"> 
+        <div>
         <Navbar />
-        <Header />
+        <HeaderContent />
         </div>
-
-    <div  className="gradient__bg"> 
-         <SliceIntro />
-         <SliceGallery/>
-         <SliceOrder />
+    <div> 
+         <IntroContent />
+         <GalleryContent/>
+         <OrderContent />
          <Footer />
+    </div>
     </div>
     </div>
     )
