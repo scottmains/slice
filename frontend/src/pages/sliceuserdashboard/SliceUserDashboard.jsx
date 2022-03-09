@@ -24,16 +24,13 @@ class SliceUserDashboard extends React.Component {
             email: "", 
             password: "",
             search:"",
-            token:null,
-            
+            token:null,   
         }
-
         this.handleEmail = this.handleEmail.bind(this);
         this.handlePassword = this.handlePassword.bind(this);
         this.handleLoginClick = this.handleLoginClick.bind(this);
         this.handleLogoutClick = this.handleLogoutClick.bind(this);
     }
-
     componentDidMount() {
         if(localStorage.getItem('myReadingListToken')) {
             this.setState(
@@ -43,14 +40,18 @@ class SliceUserDashboard extends React.Component {
         }
     }
 
-    
+ 
     
     handlePassword = (e) => {
-        this.setState({password:e.target.value})
+        const value = e.target.value
+        this.setState({password:value})
+            
     }
 
     handleEmail = (e) => {
-        this.setState({email:e.target.value})
+        const value = e.target.value
+        this.setState({email:value})
+            
     }
 
     handleLogoutClick = () => {
@@ -101,10 +102,12 @@ class SliceUserDashboard extends React.Component {
 
     render() {
         let page = (
+            
+
             <Login handleEmail={this.handleEmail} 
             handlePassword={this.handlePassword}
             handleLoginClick={this.handleLoginClick}  />
-            
+         
         )
         
         if (this.state.authenticated) {
@@ -116,10 +119,9 @@ class SliceUserDashboard extends React.Component {
             )
         }
         return (
-             
             <div className="gradient__bg">
                  <Navbar/>
-                 
+                
                 {page}
                 <Footer />
             </div>

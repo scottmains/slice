@@ -18,13 +18,11 @@ class Login extends React.Component {
 render() {
   return (
     <div className="slice__login section__padding">
-
     <div className="slice__login-box">
            <div>
            <div className="slice__header-img">
            <img src={sliceheaderimg} alt="slice logo"/>
            </div>
-           <div className="slice__header-buttons">
              <h1> LOGIN </h1>
            <div>
       <div className="">
@@ -45,6 +43,7 @@ render() {
          onChange={this.props.handlePassword}
        />
        </div>
+      
       <button className="" onClick={this.props.handleLoginClick}>Log in</button>
     </div>
     <div className="slice__create-account">
@@ -57,7 +56,7 @@ render() {
           </div>
           </div>
       
-    </div>
+   
   );
 }
 }

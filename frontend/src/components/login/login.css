@@ -12,7 +12,7 @@
     margin: 0 auto;
     }
 
-    input{
+    .slice__login-box input{
         width: 60%;
         height: 40px;
         background: #e0dede;
@@ -42,7 +42,7 @@
         transition: .2s ease-in;
         cursor: pointer;
     }
-    button:hover{
+    .slice__login-box button:hover{
         background: #6d44b8;
     }
 

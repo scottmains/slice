@@ -1,6 +1,6 @@
 import React from 'react';
 import { useState, useEffect } from 'react';
-import { SliceHome,SliceMenu, SliceStory, NotFound, SliceBooking, SliceUserDashboard, SliceSignUp} from './pages'
+import { SliceHome,SliceMenu, SliceStory, NotFound, SliceBooking, SliceUserDashboard, SliceSignUp, SliceBookingConfirm} from './pages'
 import './App.css'
 import "react-loader-spinner/dist/loader/css/react-spinner-loader.css";
 import {ScrollToTop} from './components'
@@ -12,15 +12,10 @@ import {
   
 } from "react-router-dom";
 
+
 const App = () => {
 
-  const  [loading, setLoading] = useState(false);
-  useEffect(() => {
-    setLoading(true)
-    setTimeout(() => {
-      setLoading(false)
-    }, 4000)
-  }, []);
+ 
 
   return (
 
@@ -36,8 +31,8 @@ const App = () => {
         <Route  path='/book' element={<SliceBooking/>}/>
         <Route  path='/user-dashboard' element={<SliceUserDashboard/>}/>
         <Route  path='/sign-up' element={<SliceSignUp/>}/>
-        <Route path='*' element={<p><NotFound/></p>}/>
-     
+        <Route path='*' element={<NotFound/>}/>
+
       </Routes>
       </div>
      

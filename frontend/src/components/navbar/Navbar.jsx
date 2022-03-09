@@ -15,7 +15,6 @@ const Menu = () => (
   <p><NavLink to ="/menu"> Our Menu</NavLink></p>
   <p><NavLink to ="/our-story"> Our Story </NavLink></p>
   <p><NavLink to ="/user-dashboard"> Login </NavLink></p>
- 
   </>
 )
 

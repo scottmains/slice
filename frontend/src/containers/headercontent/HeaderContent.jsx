@@ -18,7 +18,7 @@ const HeaderContent = () => {
            <div className="slice__header-buttons">
           <div><a className="slice__collect-button"> Click and Collect</a></div>
           <div><a className="slice__collect-button"> Delivery </a> </div>
-          <div><a className="slice__collect-button"> Book Table </a> </div> 
+          <div><a href ="/book" className="slice__collect-button"> Book Table </a> </div> 
           </div>
      
           </div>
