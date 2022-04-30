@@ -6,6 +6,7 @@
     justify-content: center;
     align-items: center;
     width: 100%;
+    color:white;
     
 }
 
@@ -38,7 +39,7 @@
 
 .slice__footer-links_div {
     display: flex;
-    justify-content: flex-start;
+
     flex-direction: column;
     
 }

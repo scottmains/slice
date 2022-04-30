@@ -16,8 +16,8 @@ use src\webpages as Webpage;
 class ErrorController extends Controller 
 {
     protected function processRequest() {
-        $page = new Webpage\HomePage("Week 5", ["home"=>"home", "documentation"=>"documentation"], "ERROR", "");
-        $page->addHeader("ERROR", "Please check to see if you are using the right link. Check the documentation page top right if you have issues.");
+        $page = new Webpage\HomePage("Slice Booking System", "", "");
+        $page->addHeader("ERROR", "Please use API ");
         return $page->generateWebpage();
     }
 }

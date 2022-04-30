@@ -33,45 +33,92 @@ class UserGateway extends Gateway {
 
     public function findPassword($email)
     {
-            $sql = " Select userid, password from users where email = :email";
+            $sql = "SELECT userid, password, isAdmin FROM users where email = :email";
             $params = [":email" => $email];
             $result = $this->getDatabase()->executeSQL($sql, $params);
             $this->setResult($result);
             return $result;
     }
 
-    public function fetchUser($userid)
+    public function findUser($userid)
     {
-            $sql = " Select userid, email, password from users where userid= :userid";
-            $params = [":userid" => $userid];
-            $result = $this->getDatabase()->executeSQL($sql, $params);
-            $this->setResult($result);
-            return $result;
+        $this->sql = "SELECT userid, name, phonenumber, email, loyaltyPoints, isAdmin from users where userid = :userid";
+        $params = ["userid" => $userid];
+        $result = $this->getDatabase()->executeSQL($this->sql, $params);
+        $this->setResult($result);
     }
 
+    public function findUserBooking($userid)
+    {
+        $this->sql = "SELECT users.userid, bookings.bookingid, bookings.bookingstart, bookings.bookingdate, bookings.dateBooked, bookings.partysize
+         from users 
+         INNER JOIN bookings ON bookings.userid = users.userid
+         where users.userid = :userid";
+        $params = ["userid" => $userid];
+        $result = $this->getDatabase()->executeSQL($this->sql, $params);
+        $this->setResult($result);
+    }
 
-    public function checkEmail($email) {
-        $sql = "SELECT COUNT(email) as num FROM users WHERE email =:email";
-        $params = ["email" => $email];
-        $result = $this->getDatabase()->executeSQL($sql, $params);
-    
+ 
+
+    public function checkEmailExists($email) {
+        $sql = "SELECT email FROM users WHERE email =:email";
+        $params = [":email" => $email];
+        $result = $this->getDatabase()->executeSQL($sql, $params);    
+        if ($result) {
+                header("HTTP/1.1 400");
+        }
 }
 
-    public function addUser($email, $password) {
+public function checkEmailDoesntExist($email) {
+        $sql = "SELECT email FROM users WHERE email =:email";
+        $params = [":email" => $email];
+        $result = $this->getDatabase()->executeSQL($sql, $params);    
+        
+}
+
+    public function addUser($name, $phonenumber, $email, $password) {
         $passwordHash = password_hash($password, PASSWORD_BCRYPT, array("cost" => 12));
-        $sql = "INSERT into users (email, password) VALUES (:email, :password)
-                INSERT into guest (userid, fullname, phonenumber) VALUES (LAST_INSERT_ID(), :fullname, :phonenumber";
-        $params = [":email" => $email, ":password" => $passwordHash,":fullname" => $fullname, ":phonenumber" => $phonenumber];
+        $sql = "INSERT into users (name, phonenumber, email, password) VALUES (:name,  :phonenumber, :email, :password)";      
+        $params = [":name" => $name, ":phonenumber" => $phonenumber, ":email" => $email, ":password" => $passwordHash];
         $result = $this->getDatabase()->executeSQL($sql, $params);
 }
 
-        public function addGuest($fullname, $phonenumber) {
-        $sql = "INSERT into guest (fullname, phonenumber) VALUES (:fullname, :phonenumber)
-                INNER JOIN users on (user.userid = guest.userid)
-                WHERE userid= :userid";
-        $params = ["fullname" => $fullname, ":phonenumber" => $phonenumber, "userid" => $userid];
+        public function addGuest($email, $fullname, $phonenumber) {
+        
+        $sql = "INSERT into guest(email, fullname, phonenumber) VALUES (:email, :fullname, :phonenumber)";      
+        $params = [":email" => $email, ":fullname" => $fullname, ":phonenumber" => $phonenumber];
         $result = $this->getDatabase()->executeSQL($sql, $params);
 }
+
+public function checkFields($input){
+        
+        //check if all required inputs have been entered
+        try {
+          if(empty($input["password"])||empty($input["email"])||empty($input["passwordconfirm"])
+	  ||empty($input["fullname"])||empty($input["phonenumber"]));
+        } catch (Exception $e) {
+                return "You don't enter all required fields";
+        }
+          //check if the password inserted has at least 8 chars
+          if(!strlen($input['password'])>=8)
+		{
+			throw new Exception("The password chose MUST be at least of 8 character"); 
+		}
+          //check passwords matches
+        if(!($input['password'] == $input['passwordconfirm'])){ // == case sensitive comparison
+            throw new Exception("<p>The passwords don't match.</p>");	
+        }
+         //check if the email address is valid
+		if(!filter_var($input['email'])|| strlen($input['email'])>30)
+		{
+			throw new Exception ("Invalid Email Address");
+		}
+
+                if (!filter_var($input['email'], FILTER_VALIDATE_EMAIL)) {
+                        throw new Exception ("Invalid Email Address");
+                      } 
+    }
 }
 
 

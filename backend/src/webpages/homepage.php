@@ -31,11 +31,10 @@ class HomePage extends Webpage
      * @param string $heading1 Sets the header for the page.
      */
 
-    public function __construct($title, $links, $activePage, $heading1) {
+    public function __construct($title, $heading1) {
         $this->setHead($title);
-        $this->addMenu($links, $activePage);
         $this->addHeading1($heading1);
-        $this->setFoot();
+     
     } 
 
  

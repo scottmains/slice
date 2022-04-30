@@ -22,7 +22,7 @@
 }
 
 
-@media screen and (max-width: 1050px) {
+@media screen and (max-width: 1200px) {
 
     .slice__menucontainer__menu {
         width: 300px;
@@ -38,7 +38,7 @@
 
 }
 
-@media screen and (max-width: 650px) {
+@media screen and (max-width: 900px) {
     
 .slice__menucontainer__menu {
     width: 100vw;

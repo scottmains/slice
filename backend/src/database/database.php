@@ -33,4 +33,11 @@ class Database
 
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
+
+    public function querySQL($sql, $params=[]) { 
+        $stmt = $this->dbConnection->prepare($sql);
+        $stmt->execute($params);
+        return $stmt->query(PDO::FETCH_ASSOC);
+    }
+
 }

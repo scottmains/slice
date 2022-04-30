@@ -19,18 +19,40 @@ if (substr($request->getPath(),0,3) === "api") {
 
 switch ($request->getPath()) {
     case '':
-    case 'home':
-        $controller = new Controller\HomeController($request, $response);
+        $controller = new Controller\ErrorController($request, $response);
         break;
     case 'api/authenticate':
-        $controller = new Controller\ApiAuthenticateController($request, $response);
-        break;
-    case 'api/guestlist':
-        $controller = new Controller\ApiGuestController($request, $response);
+        $controller = new Controller\Authenticate($request, $response);
         break;
     case 'api/register':
-        $controller = new Controller\ApiRegisterController($request, $response);
+        $controller = new Controller\Register($request, $response);
         break;
+    case 'api/guestreservation':
+        $controller = new Controller\GuestReservation($request, $response);
+        break;
+    case 'api/userreservation':
+        $controller = new Controller\UserReservation($request, $response);
+        break;
+    case 'api/finduser':
+        $controller = new Controller\FindUser($request, $response);
+        break;
+    case 'api/adminbookings':
+        $controller = new Controller\AdminBookings($request, $response);
+        break;
+    case 'api/admincustomers':
+        $controller = new Controller\AdminCustomers($request, $response);
+        break;
+    case 'api/showuserbookings':
+        $controller = new Controller\ShowUserBookings($request, $response);
+        break;
+    case 'api/checkrestaurant':
+        $controller = new Controller\Restaurant($request, $response);
+        break;
+    case 'api/checktimeslots':
+        $controller = new Controller\Timeslots($request, $response);
+        break;
+        
+    
     default:
         if (substr($request->getPath(),0,3) === "api") {
         $controller = new Controller\ApiErrorController($request, $response);

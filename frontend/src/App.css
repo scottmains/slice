@@ -6,47 +6,27 @@
 }
 
 body {
-    background: var(--color-bg);
-    color:white;
+    background-color: white;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-position: center; 
+    color:black;
     width: 100%;
+    font-family: var(--font-family);
+   
    
 }
 
-html,body{
-  
-}
-h1, h2, h3 {
-  text-shadow: 1px 1px 2px black;
+h1, h2 {
+  font-family: var(--font-title)
 }
 
-p {
-  text-shadow: 0.2px 0.2px 1px black;
-}
 
 a{
     color: unset;
     text-decoration: none;
 }
 
-
-.gradient__bg {
-  background: #1a2a6c;  /* fallback for old browsers */
-  background: -webkit-linear-gradient(to bottom, #fdbb2d, #b21f1f, #1a2a6c);  /* Chrome 10-25, Safari 5.1-6 */
-  background: linear-gradient(to bottom, #fdbb2d, #b21f1f, #1a2a6c); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
-  
-
-  
-  
-
-}
-
-.gradient__text {
-  color: #f1f2f6;
- 
-    --webkit-background-clip: text;
-    --webkit-text-fill-color:transparent;
-    
-}
 
 .section__padding {
     padding: 4rem 6rem;
@@ -60,6 +40,9 @@ a{
 	-webkit-animation: scale-down-center 0.4s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
 	        animation: scale-down-center 0.4s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
 }
+
+
+
 
 
 
@@ -94,7 +77,6 @@ a{
     }
 
   }
-
 
   @media screen and (max-width: 550px) {
     .section__padding {

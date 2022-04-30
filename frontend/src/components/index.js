@@ -1,8 +1,11 @@
-export { default as Navbar } from './navbar/Navbar'
-export { default as Slider } from './slider/Slider'
+export { default as Navbar } from './Navbar'
 export { default as Menu } from './menu/Menu'
-export { default as BookingForm } from './bookingform/BookingForm'
-export { default as ScrollToTop } from './scrolltotop/ScrollToTop'
-export { default as Login } from './login/Login'
-
-
+export { default as GuestBookingForm } from './bookingforms/GuestBookingForm'
+export { default as ScrollToTop } from './ScrollToTop'
+export { default as Login } from './Login'
+export { default as LocationModal } from './LocationModal'
+export { default as ContactForm } from './ContactForm'
+export { default as SignUp} from './SignUp'
+export { default as AdminNavbar} from './AdminNav/AdminNavbar'
+export { default as AdminSidebar} from './AdminNav/AdminSidebar'
+export { default as UserBookingForm } from './bookingforms/UserBookingForm'

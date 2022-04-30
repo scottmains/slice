@@ -8,14 +8,12 @@ const Menu = ({title, text, price}) =>  {
 
     <div className="slice__menucontainer__menu">
         <div className="slice__menucontainer__menu-title">
-            <h3> {title} </h3>
+            <h3> {title}  </h3>  
             </div>
                 <div className="slice__menucontainer__menu-text">
                     {text}
-                </div>
-                <div className="slice__menucontainer__menu-price">
-                    {price}
-                </div>
+                </div> 
+                <p className="font-bold">{price} </p> 
         </div>
 
     )
