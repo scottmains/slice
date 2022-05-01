@@ -1,10 +1,10 @@
 import axios from 'axios';
 import React, {useState} from 'react';
-import { AdminContext } from '../../../App';
+import { TokenContext } from '../../../App';
 const UpdateClosingTimeModal = ({setShowModalClosingTimeUpdate}) => {
 
   const [closingTimeUpdate, setClosingTimeUpdate] = useState(null);
-  const jwtToken = React.useContext(AdminContext); 
+  const jwtToken = React.useContext(TokenContext); 
   const updateClosingTime= async (e) => {
 
     const fd = new FormData();

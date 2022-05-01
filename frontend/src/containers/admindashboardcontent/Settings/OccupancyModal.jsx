@@ -1,10 +1,10 @@
 import axios from 'axios';
 import React, { useState} from 'react';
-import { AdminContext } from '../../../App';
+import { TokenContext } from '../../../App';
 const UpdateOccupancyModal = ({setShowModalOccupancyUpdate}) => {
 
   const [occupancyUpdate, setOccupancyUpdate] = useState(null);
-  const jwtToken = React.useContext(AdminContext); 
+  const jwtToken = React.useContext(TokenContext); 
   const updateOccupancy = async (e) => {
 
     const fd = new FormData();

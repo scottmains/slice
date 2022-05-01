@@ -1,6 +1,6 @@
 import React, {Fragment, useState, useEffect} from 'react'
 import {AdminSidebar} from '../../../components'
-import { UserContext } from '../../../App';
+
 import {  useNavigate } from 'react-router-dom';
 import { Listbox, Transition } from '@headlessui/react'
 import { CheckIcon, SelectorIcon } from '@heroicons/react/solid'
@@ -8,12 +8,12 @@ import OccupancyModal from './OccupancyModal';
 import OpeningTimeModal from './OpeningTimeModal';
 import ClosingTimeModal from './ClosingTimeModal';
 import axios from 'axios';
-import { AdminContext } from "../../../App";
+import { AdminContext, TokenContext } from "../../../App";
 
 const AdminCustomers = () => {
 
 
-  const isAdmin = React.useContext(UserContext); 
+  const isAdmin = React.useContext(AdminContext); 
   let navigate = useNavigate();
   const [openingTime, setOpeningTime] = useState("")
 const [closingTime, setClosingTime] = useState("")
@@ -54,7 +54,7 @@ const [showModalClosingTimeUpdate, setShowModalClosingTimeUpdate] = React.useSta
    
    }, []);
 
-   const jwtToken = React.useContext(AdminContext); 
+   const jwtToken = React.useContext(TokenContext); 
 
    console.log(jwtToken)
 

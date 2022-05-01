@@ -2,7 +2,7 @@ import React from 'react'
 import {AdminSidebar} from '../../../components'
 import axios from 'axios';
 import { useRef, useState, useEffect, useContext } from 'react';
-import { UserContext } from '../../../App';
+import { AdminContext } from '../../../App';
 import {  useNavigate } from 'react-router-dom';
 import MarketingExcerpt from './MarketingExcerpt';
 import emailjs from 'emailjs-com';
@@ -13,7 +13,7 @@ const AdminMarketing= () => {
   const [allCustomers, setAllCustomers] = useState([]);
   const [array, setArray] = useState([])
 
-  const isAdmin = React.useContext(UserContext); 
+  const isAdmin = React.useContext(AdminContext); 
   const form = useRef();
   let navigate = useNavigate();
 

@@ -54,6 +54,9 @@ switch ($request->getPath()) {
     case 'api/adminsettings':
         $controller = new Controller\AdminSettings($request, $response);
         break;
+    case 'api/userdeletebooking':
+        $controller = new Controller\UserDeleteBooking($request, $response);
+        break;
     default:
         if (substr($request->getPath(),0,3) === "api") {
         $controller = new Controller\ApiErrorController($request, $response);

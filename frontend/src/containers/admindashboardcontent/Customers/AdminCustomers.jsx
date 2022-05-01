@@ -3,7 +3,7 @@ import {AdminSidebar} from '../../../components'
 import { useState, useEffect} from 'react';
 import axios from 'axios';
 import CustomerExcerpt from './AdminCustomersExcerpt';
-import { UserContext } from '../../../App';
+import { AdminContext } from '../../../App';
 import {  useNavigate } from 'react-router-dom';
 
 
@@ -16,7 +16,7 @@ const AdminCustomers = (userId) => {
   let navigate = useNavigate();
 
 
-  const isAdmin = React.useContext(UserContext); 
+  const isAdmin = React.useContext(AdminContext); 
 
   if (isAdmin === "0") {
     navigate("/", { replace: true });

@@ -1,4 +1,4 @@
-import { Fragment } from 'react'
+import React, { Fragment } from 'react'
 import { Disclosure, Menu, Transition } from '@headlessui/react'
 import {  MenuIcon, XIcon } from '@heroicons/react/outline'
 import { useRef, useState, useEffect, useContext } from 'react';
@@ -6,7 +6,7 @@ import SliceLogo from '../assets/slicelogoblack.svg'
 import SignUp from './SignUp'
 import Login from './Login'
 import { FaRegUserCircle } from 'react-icons/fa';
-import jwt_decode from "jwt-decode";
+import { AdminContext, AuthContext } from '../App';
 import { NavLink } from 'react-router-dom';
 
 const navigation = [
@@ -24,36 +24,17 @@ function classNames(...classes) {
 
 const Navbar = () => {
 
-  const [authenticated, setAuthenticated] = useState(false);
- 
-  const [isAdmin, setAdmin] = useState(0);
 
-  console.log(isAdmin)
 
-  useEffect(() => {
-    const token = localStorage.getItem("sliceLogin");
-    try {
-    const tokenExp = jwt_decode(token);
-    console.log(tokenExp.isAdmin)
-    if (tokenExp.exp < Date.now() /1000) {
-      setAuthenticated(false)
-      localStorage.removeItem('sliceLogin'); 
-    } else {
-      setAuthenticated(true);
-      setAdmin(tokenExp.isAdmin);
-    }
-  } catch {
-    console.log("token doesn't exist");
-    }
-  }, [authenticated])
+  const isAdmin = React.useContext(AdminContext); 
+  const authenticated = React.useContext(AuthContext); 
 
  const handleLogoutClick = () => {
-    setAuthenticated(false)
     localStorage.removeItem('sliceLogin'); 
     window.location.reload(false);
 }
 
-
+console.log(authenticated)
 let checkAdmin = (
   <>
 
@@ -130,8 +111,6 @@ if (isAdmin === "1") {
   </Menu.Item>
 
 </>
-  
-
   )
 }
 
@@ -309,11 +288,6 @@ if (authenticated) {
     </Disclosure>
   )
 }
-
-
-
-
-
 
   return (
     <>

@@ -24,24 +24,35 @@ import useAuth from './context/useAuth'
 
 export const UserContext = React.createContext();
 export const AdminContext = React.createContext();
+export const AuthContext = React.createContext();
+export const TokenContext = React.createContext();
 
 const App = () => {
 
  const [userId, setUserId] = useState("");
  const [isAdmin, setAdmin] = useState("0");
  const [jwtToken, setJwtToken] = useState("0");
-
+  const [authenticated, setAuthenticated] = useState(false);  
 
   useEffect(() => {
 
     const token = localStorage.getItem("sliceLogin");
-    setJwtToken(token)
-    if (token) {
+    try {
     const tokenExp = jwt_decode(token);
-      setAdmin(tokenExp.isAdmin)
-      setUserId(tokenExp.userid);  
-    } 
-  }, [])
+  
+    if (tokenExp.exp < Date.now() /1000) {
+      setAuthenticated(false)
+      localStorage.removeItem('sliceLogin'); 
+    } else {
+      setJwtToken(token)
+      setAuthenticated(true);
+      setAdmin(tokenExp.isAdmin);
+      setUserId(tokenExp.userid);
+    }
+  } catch {
+    console.log("token doesn't exist");
+    }
+  }, [authenticated])
 
 
 
@@ -50,6 +61,9 @@ const App = () => {
     <Router>
      <ScrollToTop/>
       <>
+      <TokenContext.Provider value ={jwtToken}> 
+      <AdminContext.Provider value = {isAdmin}>
+      <AuthContext.Provider value = {authenticated}>
       <UserContext.Provider value = {userId}>
       <Routes>
         <Route exact path='/' index element={<SliceHome/>}/>
@@ -62,8 +76,11 @@ const App = () => {
         <Route  path='/catering' element={<SliceCatering/>}/>
         </Routes>
       </UserContext.Provider>
-      <AdminContext.Provider value ={jwtToken}> 
-        <UserContext.Provider value = {isAdmin}  > 
+      </AuthContext.Provider>
+      </AdminContext.Provider>
+      </TokenContext.Provider>
+      <TokenContext.Provider value ={jwtToken}> 
+        <AdminContext.Provider value = {isAdmin}  > 
         <Routes>
         <Route  path='/admin' element={<SliceAdminDashboard/>}/>
         <Route path='/admin-customers' element={<AdminCustomers />} />
@@ -71,13 +88,11 @@ const App = () => {
         <Route path='/admin-settings' element={<AdminSettings/>} />
         <Route path='*' element={<NotFound/>}/>
         </Routes>
-        </UserContext.Provider>
         </AdminContext.Provider>
+        </TokenContext.Provider>
       </>
-
      </Router>
    
-    
   )
 };
 

@@ -3,19 +3,20 @@ import React from 'react';
 import { Fragment, useRef, useState } from 'react'
 import { Dialog, Transition } from '@headlessui/react'
 import { ExclamationIcon } from '@heroicons/react/outline'
-import { UserContext } from "../../../App";
+import { TokenContext, UserContext } from "../../../App";
 import axios from 'axios';
 
 
 const DeleteBookingModal = ({setShowModal, showModal}) => {
 
   const userId = React.useContext(UserContext);  
-
+  const jwtToken = React.useContext(TokenContext)
 
   const removeBooking = async () => {
     const fd = new FormData();
         fd.append('userid', userId);
-           const response = await axios.post('http://localhost/kv6003/backend/api/adminbookings',
+        fd.append('token', jwtToken);
+           const response = await axios.post('http://localhost/kv6003/backend/api/userdeletebooking',
                fd).then((res)=> {
                 window.location.reload(false);
               });

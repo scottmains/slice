@@ -3,12 +3,12 @@ import axios from 'axios';
 import { AiOutlineCalendar, AiOutlineClockCircle, AiOutlinePhone, AiOutlineMail } from 'react-icons/ai'; 
 import { GrGroup} from 'react-icons/gr'; 
 import {BiPhone} from 'react-icons/bi'
-import { AdminContext } from '../../../App';
+import { TokenContext } from '../../../App';
 import React from 'react'
 const BookingExcerpt = ({ booking }) => {
 
     var moment = require('moment'); 
-    const jwtToken = React.useContext(AdminContext);
+    const jwtToken = React.useContext(TokenContext);
 
     const removeBooking = async () => {
         const fd = new FormData();

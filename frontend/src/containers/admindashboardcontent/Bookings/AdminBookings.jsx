@@ -4,7 +4,7 @@ import {AdminSidebar} from '../../../components'
 import axios from 'axios';
 import { useRef, useState, useEffect, useContext } from 'react';
 import AdminBookingExcerpt from './AdminBookingExcerpt';
-import { UserContext } from '../../../App';
+import { AdminContext } from '../../../App';
 import {  useNavigate } from 'react-router-dom';
 
 
@@ -18,7 +18,7 @@ const AdminBookings = () => {
   const [search, setSearch] = useState([]);
   let navigate = useNavigate();
 
-  const isAdmin = React.useContext(UserContext); 
+  const isAdmin = React.useContext(AdminContext); 
 
   if (isAdmin === "0") {
     navigate("/", { replace: true });

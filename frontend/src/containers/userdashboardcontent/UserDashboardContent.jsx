@@ -88,8 +88,6 @@ if (partySize) {
 
 const userId = React.useContext(UserContext);  
 
-
-
 const [isBusy, setBusy] = useState(true)
 
 
@@ -137,7 +135,6 @@ getUser();
       setEmail(jsonData.email)
       setPhoneNumber(jsonData.phonenumber)
       setLoyaltyPoints(jsonData.loyaltyPoints)
-      console.log(userDetails)
       }
       }
     }, [getUser]);

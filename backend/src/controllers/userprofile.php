@@ -35,9 +35,8 @@ class UserProfile extends Controller {
                 $this->getGateway()->changeEmail($userid, $email);
             } elseif (!is_null($phonenumber)){
                 $this->getGateway()->changeNumber($userid, $phonenumber);
-            }
+            } 
             
-
      else {
         $this->getResponse()->setMessage("Method not allowed");
         $this->getResponse()->setStatusCode(405);
