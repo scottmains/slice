@@ -52,11 +52,12 @@ class ReservationGateway extends Gateway {
 
     public function checkBookingDate($bookingdate) {
 
-        $sql = "SELECT bookingDate, bookingStart, partysize FROM bookings WHERE bookingDate =:bookingDate";
+        $sql = "SELECT bookingDate, bookingStart, SUM(partysize) FROM bookings WHERE bookingDate =:bookingDate 
+                GROUP BY bookingStart
+                HAVING SUM(partysize) > 30";
         $params = [":bookingDate" => $bookingdate];
         $result = $this->getDatabase()->executeSQL($sql, $params);
         $this->setResult($result);
-
     }
      
     public function addUserReservation($userid, $partysize, $bookingdate, $bookingstart)

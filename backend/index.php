@@ -51,8 +51,9 @@ switch ($request->getPath()) {
     case 'api/checktimeslots':
         $controller = new Controller\Timeslots($request, $response);
         break;
-        
-    
+    case 'api/adminsettings':
+        $controller = new Controller\AdminSettings($request, $response);
+        break;
     default:
         if (substr($request->getPath(),0,3) === "api") {
         $controller = new Controller\ApiErrorController($request, $response);

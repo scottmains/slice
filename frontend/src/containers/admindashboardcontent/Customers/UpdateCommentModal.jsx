@@ -1,15 +1,17 @@
 import axios from 'axios';
-import { useState} from 'react';
+import React,{ useState} from 'react';
+import { AdminContext } from '../../../App';
 
 const UpdateCommentModal = ({setShowModalCommentUpdate, userId}) => {
 
   const [commentUpdate, setCommentUpdate] = useState(null);
-
+  const jwtToken = React.useContext(AdminContext);
   const updateComment = async (e) => {
 
     const fd = new FormData();
     fd.append('userid', userId);
     fd.append('comment', commentUpdate);
+    fd.append('token', jwtToken);
     const response = await axios.post('http://localhost/kv6003/backend/api/admincustomers', fd)
     .then((res)=> {
       window.location.reload(false);

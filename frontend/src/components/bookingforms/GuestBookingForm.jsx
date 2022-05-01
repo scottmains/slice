@@ -10,7 +10,7 @@ import Navbar from '../Navbar';
 import { Footer } from '../../containers';
 import Paragraph from '@material-tailwind/react/Paragraph';
 import axios from 'axios';
-import { countBy } from 'lodash';
+
 
 const GuestBookingForm = () => {
 
@@ -64,9 +64,14 @@ const onDayPress = (value) => {
 
     let formData = new FormData();
     formData.append('bookingDate', datevalue);
+    formData.append('maxoccupancy', maxOccupancy);
    axios.post('http://localhost/kv6003/backend/api/checktimeslots', formData)
    .then(resp => {
-      setAllTimeSlots(resp.data.results)
+      if (resp.data.results) {
+      setAllTimeSlots(resp.data.results[0].bookingStart)
+      } else {
+         setAllTimeSlots(null);
+      }
  });
   }
   const checkRestaurant =  () => {
@@ -114,51 +119,37 @@ fetch(url, {   method: 'POST',
     });
   }
 
-console.log(openingTime+timeInterval)
+const Buttons =  (e) => {  
 
-// Convert a time in hh:mm format to minutes
+const toMinutes = str => str.split(":").reduce((h, m) => h * 60 + +m);
 function timeToMins(time) {
    var b = time.split(':');
    return b[0]*60 + +b[1];
  }
+ let newTimeInterval = timeToMins(timeInterval);
 
- function timeFromMins(mins) {
-   function z(n){return (n<10? '0':'') + n;}
-   var h = (mins/60 |0) % 24;
-   var m = mins % 60;
-   return z(h) + ':' + z(m);
- }
- 
- function addTimes(t0, t1) {
-   return timeFromMins(timeToMins(t0) + timeToMins(t1));
- }
- 
-let time1 = addTimes(openingTime, timeInterval) 
-let time2 = addTimes(time1, timeInterval)
-let time3 = addTimes(time2, timeInterval)
-let time4 = addTimes(time3, timeInterval)
-let time5 = addTimes(time4, timeInterval)
-let time6 = addTimes(time5, timeInterval)
-let time7 = addTimes(time6, timeInterval)
-let time8 = addTimes(time7, timeInterval)
-let time9 = addTimes(time8, timeInterval)
+const toString = min => (Math.floor(min / 60) + ":" + (min % 60))
+                       .replace(/\b\d\b/, "0$&");
 
-if (time6 > closingTime) {
-   time6 = null
-   time7= null
-   time8= null
-   time9= null
+function slots(startStr, endStr=closingTime) {
+         let start = toMinutes(startStr); 
+         let end = toMinutes(endStr);
+         return Array.from({length: Math.floor((end - start) / newTimeInterval) + 1}, (_, i) =>
+         toString(start + i * newTimeInterval)
+                        );
+}    
+
+let newTimeSlots = slots(openingTime)
+if (allTimeSlots) {
+const index = newTimeSlots.indexOf(allTimeSlots);
+if (index > -1) {
+  newTimeSlots.splice(index, 1); // 2nd parameter means remove one item only
+}
+console.log(allTimeSlots)
 }
 
-if (time8 >= closingTime) {
-   time8=null
-   time9= null
-}
-console.log(closingTime)
-const Buttons =  (e) => {  
-   const allTimes = [openingTime,time1,time2,time3,time4,time5,time6,time7,time8,time9];
 return ( 
-   allTimes.map(item => (
+   newTimeSlots.map(item => (
       <button
           key={item}
           onClick={(e) => {setSelected(item); setTimeSlot(item); }}
@@ -171,44 +162,13 @@ return (
 )
 }
 
-
-
-if (allTimeSlots) { 
-   console.log(allTimeSlots)
-const bookingLol = (allTimeSlots.reduce((a,v) => a = a +parseInt(v.partysize), 0))
-
-const bookingStartTimes = allTimeSlots
-    .map(dataItem => dataItem.bookingStart) // get all media types
-    .filter((bookingStartTime, index, array) => array.indexOf(bookingStartTime) === index);
-
-    const counts = bookingStartTimes
-  .map(bookingStartTime => ({
-    type: bookingStartTime,
-  count: allTimeSlots.filter(item => item.bookingStart === bookingStartTime).length
-  }));
-
-  const CountpartySizes = allTimeSlots
-  .map(dataItem => dataItem.partysize) // get all media types
-  .filter((partySizes, index, array) => array.indexOf(partySizes) === index);
-
-  const countsPartySize =CountpartySizes
-.map(partySizes => ({
-  type: partySizes,
-count: allTimeSlots.filter(item => item.partysize === partySizes).length
-}));
-
-
-console.log(countsPartySize)
-}
-
-
   return (
    <>
    <Navbar/> 
 
     <div className="pt-20 pb-20 text-center " >
        {/* DISPLAYS FIRST SECTION OF BOOKING FORM  */}
-    <div className="card w-1/3 bg-gray-100 shadow-xl mx-auto" >
+    <div className="card md:w-1/3 bg-gray-100 shadow-xl mx-auto" >
     <div className="card-body" style= {{ display: stageOne ? "block" : "none"  }}>
        <H4 className="card-title">Party Size</H4>
        <LeadText> Please select how many people will be attending: </LeadText>
@@ -267,13 +227,13 @@ console.log(countsPartySize)
       <Buttons/>
       </div>
     </div>
-    <div className="flex">
+    <div className="flex pt-5">
        <div className="card-actions justify-start mx-auto ">
           <button onClick={() => [setStageTwo(false), setStageOne(true)]} className="group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm 
           font-medium rounded-md text-white bg-purple-600 hover:bg-purple-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-purple-500">Back</button>
        </div>
        <div className="card-actions justify-end content-end mx-auto ">
-          <button disabled={date && timeSlot === null}  onClick={() => [setStageThree(true), setStageTwo(false)]} className="group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm 
+          <button disabled={date === null}  onClick={() => [setStageThree(true), setStageTwo(false)]} className="group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm 
           font-medium rounded-md text-white bg-rose-600 hover:bg-rose-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-rose-500">Continue</button>
        </div>
     </div>

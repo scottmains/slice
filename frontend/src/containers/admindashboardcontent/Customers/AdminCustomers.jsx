@@ -76,7 +76,7 @@ if ((filteredResults.length > 0) && (search !== undefined)) {
     <div className="md:pt-2 mb-3 w-4/5 mx-auto ">
                 <div className=" md:w-1/3  mx-auto"> 
                 <input className="px-3 py-3 placeholder-slate-300 text-slate-600 relative bg-white rounded text-sm border 
-                border-slate-300 outline-none focus:outline-none focus:ring w-full " type='text' placeholder='Search bookings' 
+                border-slate-300 outline-none focus:outline-none focus:ring w-full " type='text' placeholder='Search Customers' 
                 value={search} onChange={(e)=> setSearch(e.target.value.toLowerCase())} />
               </div>   
             </div>

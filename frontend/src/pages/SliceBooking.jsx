@@ -27,8 +27,8 @@ const SliceBooking = () => {
 let page = (
   <> 
   <Navbar/> 
-<div className="pt-20 pb-20 ">
-        <div class="card md:w-2/6 w-full bg-gray-100 shadow-xl mx-auto ">
+<div className="pt-20 pb-20  min-h-screen  ">
+        <div class="card md:w-2/6 w-full bg-gray-100 shadow-xl m-auto">
             <div class="card-body">
             <H4 class="card-title">Slice Booking</H4>
            <LeadText> Welcome! please know that you can only book into our Middlesbrough restaurant at this time.</LeadText>
@@ -50,8 +50,8 @@ if (authenticated) {
     <> 
     <Navbar/> 
 
-    <div className="pt-20 pb-20 ">
-        <div class="card w-full md:w-2/6 bg-gray-100 shadow-xl mx-auto ">
+    <div className="flex pt-20 pb-20 ">
+        <div class="card w-full md:w-2/6 bg-gray-100 shadow-xl m-auto ">
             <div class="card-body">
             <H4 class="card-title">Slice Booking</H4>
            <LeadText> Welcome! please know that you can only book into our Middlesbrough restaurant at this time.</LeadText>

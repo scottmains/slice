@@ -14,7 +14,7 @@ import SignUp from './components/SignUp';
 import SliceAdminDashboard from './pages/SliceAdminDashboard';
 import AdminCustomers from './containers/admindashboardcontent/Customers/AdminCustomers';
 import AdminMarketing from './containers/admindashboardcontent/Marketing/AdminMarketing';
-import AdminSettings from './containers/admindashboardcontent/AdminSettings';
+import AdminSettings from './containers/admindashboardcontent/Settings/AdminSettings';
 import GuestBookingForm from './components/bookingforms/GuestBookingForm';
 import UserBookingForm from './components/bookingforms/UserBookingForm';
 import jwt_decode from "jwt-decode";
@@ -23,15 +23,19 @@ import useAuth from './context/useAuth'
 
 
 export const UserContext = React.createContext();
+export const AdminContext = React.createContext();
 
 const App = () => {
 
  const [userId, setUserId] = useState("");
  const [isAdmin, setAdmin] = useState("0");
+ const [jwtToken, setJwtToken] = useState("0");
+
 
   useEffect(() => {
 
     const token = localStorage.getItem("sliceLogin");
+    setJwtToken(token)
     if (token) {
     const tokenExp = jwt_decode(token);
       setAdmin(tokenExp.isAdmin)
@@ -39,7 +43,6 @@ const App = () => {
     } 
   }, [])
 
-  console.log(isAdmin)
 
 
   return (
@@ -59,8 +62,8 @@ const App = () => {
         <Route  path='/catering' element={<SliceCatering/>}/>
         </Routes>
       </UserContext.Provider>
-      
-        <UserContext.Provider value = {isAdmin}> 
+      <AdminContext.Provider value ={jwtToken}> 
+        <UserContext.Provider value = {isAdmin}  > 
         <Routes>
         <Route  path='/admin' element={<SliceAdminDashboard/>}/>
         <Route path='/admin-customers' element={<AdminCustomers />} />
@@ -69,6 +72,7 @@ const App = () => {
         <Route path='*' element={<NotFound/>}/>
         </Routes>
         </UserContext.Provider>
+        </AdminContext.Provider>
       </>
 
      </Router>

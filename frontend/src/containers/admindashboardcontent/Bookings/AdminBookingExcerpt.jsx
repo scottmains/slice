@@ -3,15 +3,17 @@ import axios from 'axios';
 import { AiOutlineCalendar, AiOutlineClockCircle, AiOutlinePhone, AiOutlineMail } from 'react-icons/ai'; 
 import { GrGroup} from 'react-icons/gr'; 
 import {BiPhone} from 'react-icons/bi'
-
+import { AdminContext } from '../../../App';
+import React from 'react'
 const BookingExcerpt = ({ booking }) => {
 
     var moment = require('moment'); 
-
+    const jwtToken = React.useContext(AdminContext);
 
     const removeBooking = async () => {
         const fd = new FormData();
             fd.append('bookingid', booking.bookingid);
+            fd.append('token', jwtToken);
                const response = await axios.post('http://localhost/kv6003/backend/api/adminbookings',
                    fd);
         

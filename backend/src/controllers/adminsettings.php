@@ -20,7 +20,7 @@ use src\gateways as Gateway;
  * 
  */
 
-class AdminBookings extends Controller {
+class AdminSettings extends Controller {
 
      
     protected function setGateway() {
@@ -29,28 +29,33 @@ class AdminBookings extends Controller {
     
     protected function processRequest() {
 
-        $bookingid = $this->getRequest()->getParameter("bookingid");
-        $userid = $this->getRequest()->getParameter("userid");
+        $openingTime = $this->getRequest()->getParameter("hours_open");
+        $closingTime = $this->getRequest()->getParameter("hours_closed");
+        $timeInterval = $this->getRequest()->getParameter("timeInterval");
+        $max_occupancy = $this->getRequest()->getParameter("max_occupancy");
         $token = $this->getRequest()->getParameter("token");
-
-        if ($this->getRequest()->getRequestMethod() === "GET") {
-           $this->getGateway()->showAllBookings();
-        }
-        else if ($this->getRequest()->getRequestMethod() === "POST") {
+     
+        if ($this->getRequest()->getRequestMethod() === "POST") {
 
             $key = SECRET_KEY;
             $decoded = JWT::decode($token, new Key($key, 'HS256'));
             $isAdmin = $decoded->isAdmin;
 
-    if ($isAdmin === "1") { 
-            if (!is_null($bookingid)) {
-                $this->getGateway()->removeBooking($bookingid);
-            } else if (!is_null($userid)) {
-                $this->getGateway()->removeBookingUser($userid);
+            if ($isAdmin === "1") { 
+            if (!is_null($openingTime)){
+                $this->getGateway()->changeOpeningTime($openingTime);
             }
-        }
+            elseif (!is_null($closingTime)){
+                $this->getGateway()->changeClosingTime($closingTime);
+        } elseif (!is_null($timeInterval)){
+            $this->getGateway()->changeTimeInterval($timeInterval);
+    } elseif (!is_null($max_occupancy)){
+        $this->getGateway()->changeMaxOccupancy($max_occupancy);
+}
+        } 
     }
-    
+
+
      else {
         $this->getResponse()->setMessage("Method not allowed");
         $this->getResponse()->setStatusCode(405);

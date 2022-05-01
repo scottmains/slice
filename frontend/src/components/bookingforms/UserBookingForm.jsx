@@ -15,7 +15,8 @@ import axios from 'axios';
 import Navbar from '../Navbar';
 import { Footer } from '../../containers';
 import { UserContext } from "../../App";
-
+import { isWithinInterval } from "date-fns";
+import { differenceInCalendarDays } from 'date-fns';
 var moment = require('moment'); 
 
 const UserBookingForm = () => {
@@ -38,8 +39,15 @@ const [email, setEmail] = useState(null);
 const [phoneNumber, setPhoneNumber] = useState(null);
 const [userDetails, setUserDetails] = useState('');
 
+const [openingTime, setOpeningTime] = useState("")
+const [closingTime, setClosingTime] = useState("")
+const [maxOccupancy, setMaxOccupancy] = useState("")
+const [timeInterval, setTimeInterval] = useState("")
+const [dateShow, setDateShow] = useState(null);
+const [allTimeSlots, setAllTimeSlots] = useState("")
+const [restaurantInfo, setRestaurantInfo] = useState("");
 const userId = React.useContext(UserContext);  
-
+const [selected, setSelected] = React.useState([]);
 
 const errRef = useRef();
 
@@ -65,12 +73,46 @@ const errRef = useRef();
             }
          }
  
-const onDayPress = (value) => {
-  
- let datevalue = moment(value).format("YYYY/MM/DD");
-  setDate(datevalue);
-  setShowTime(true); 
-}
+         const onDayPress = (value) => {
+
+            let datevalueshow =  moment(value).format("DD/MM/YYYY");
+            let datevalue = moment(value).format("YYYY/MM/DD");
+             setDate(datevalue);
+             setDateShow(datevalueshow);
+             setShowTime(true); 
+         
+             let formData = new FormData();
+             formData.append('bookingDate', datevalue);
+             formData.append('maxoccupancy', maxOccupancy);
+            axios.post('http://localhost/kv6003/backend/api/checktimeslots', formData)
+            .then(resp => {
+               if (resp.data.results) {
+               setAllTimeSlots(resp.data.results[0].bookingStart)
+               } else {
+                  setAllTimeSlots(null);
+               }
+          });
+           }
+           const checkRestaurant =  () => {
+            axios.get('http://localhost/kv6003/backend/api/checkrestaurant')
+            .then(resp => {
+              setRestaurantInfo(resp.data.results[0]);
+              setOpeningTime(resp.data.results[0].hours_open)
+              setClosingTime(resp.data.results[0].hours_closed)
+              setMaxOccupancy(resp.data.results[0].max_occupancy)
+              setTimeInterval(resp.data.results[0].timeInterval)
+          });
+          }
+
+          
+ useEffect(() => {
+   const fetchData = async() => await checkRestaurant();
+   fetchData();
+
+}, []);
+
+
+ 
 
 const handleSubmit = async (e) => {  
  
@@ -101,14 +143,56 @@ fetch(url, {   method: 'POST',
     });
   }
 
-  console.log(date)
+  const Buttons =  (e) => {  
+
+   const toMinutes = str => str.split(":").reduce((h, m) => h * 60 + +m);
+   function timeToMins(time) {
+      var b = time.split(':');
+      return b[0]*60 + +b[1];
+    }
+    let newTimeInterval = timeToMins(timeInterval);
+   
+   const toString = min => (Math.floor(min / 60) + ":" + (min % 60))
+                          .replace(/\b\d\b/, "0$&");
+   
+   function slots(startStr, endStr=closingTime) {
+            let start = toMinutes(startStr); 
+            let end = toMinutes(endStr);
+            return Array.from({length: Math.floor((end - start) / newTimeInterval) + 1}, (_, i) =>
+            toString(start + i * newTimeInterval)
+                           );
+   }    
+   
+   let newTimeSlots = slots(openingTime)
+   if (allTimeSlots) {
+   const index = newTimeSlots.indexOf(allTimeSlots);
+   if (index > -1) {
+     newTimeSlots.splice(index, 1); // 2nd parameter means remove one item only
+   }
+   console.log(allTimeSlots)
+   }
+   return ( 
+      newTimeSlots.map(item => (
+         <button
+             key={item}
+             onClick={(e) => {setSelected(item); setTimeSlot(item); }}
+             className= {item === selected ? "bg-blue-700 text-white font-bold py-2 px-4 rounded-full" : "bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full" }
+             value={item}
+         >
+             {item}
+         </button>
+     ))
+   )
+}
+
+
   return (
   <> 
   <Navbar/> 
-    <div className="pt-20 pb-20 text-center " >
+    <div className="pt-20 pb-20 text-center h-2/3 flex h-100 " >
        {/* DISPLAYS FIRST SECTION OF BOOKING FORM  */}
-    <div className="card w-full md:w-1/3 bg-gray-100 shadow-xl mx-auto" >
-    <div className="card-body" style= {{ display: stageOne ? "block" : "none"  }}>
+    <div className="card w-full md:w-1/3 bg-gray-100 shadow-xl m-auto " >
+    <div className="card-body " style= {{ display: stageOne ? "block" : "none"  }}>
        <H4 className="card-title">Party Size</H4>
        <LeadText> Please select how many people will be attending: </LeadText>
        <div className="flex justify-center flex-col mx-auto">
@@ -163,36 +247,10 @@ fetch(url, {   method: 'POST',
     onChange={onChange}
     value={value}
     onClickDay={onDayPress}
-     
     minDate={new Date()}/> 
     <div className="flex justify-center">
        <div className="mb-3 pt-5 xl:w-96">
-          <select className="form-select appearance-none
-             block
-             w-full
-             text-base
-             font-normal
-             text-gray-700
-             bg-white bg-clip-padding bg-no-repeat
-             border border-solid border-gray-300
-             rounded
-             transition
-             ease-in-out
-             m-0
-             focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none" aria-label="Default select example" onChange={e =>
-             {
-             setTimeSlot(e.target.value);
-             }}>
-             <option value="17:00" selected>17:00</option>
-             <option value="17:30">17:30</option>
-             <option value="18:00">18:00</option>
-             <option value="18:30">18:30</option>
-             <option value="18:30">19:00</option>
-             <option value="18:30">19:30</option>
-             <option value="18:30">20:00</option>
-             <option value="18:30">20:30</option>
-             <option value="18:30">21:00</option>
-          </select>
+         <Buttons/>
        </div>
     </div>
     <div className="flex">

@@ -23,7 +23,7 @@ class Timeslots extends Controller {
     protected function processRequest() {
 
         $bookingdate = $this->getRequest()->getParameter("bookingDate");
-     
+       
       
        if ($this->getRequest()->getRequestMethod() === "POST") {
             if (!is_null($bookingdate)) {

@@ -17,7 +17,7 @@ class ApiErrorController extends Controller {
 
     protected function processRequest() {
         $data['message'] = "Endpoint not found";
-        $data['documentation'] = "http://unn-w18003567.newnumyspace.co.uk/kf6012/part1/documentation";
+        $data['documentation'] = "";
 
         return $data;
     }

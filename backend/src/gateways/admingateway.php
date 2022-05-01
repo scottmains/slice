@@ -102,5 +102,33 @@ public function changeComment($userid, $comment) {
         $result = $this->getDatabase()->executeSQL($sql, $params);
 }
 
+public function changeMaxOccupancy($max_occupancy) {
+        $sql = "UPDATE restaurant
+        SET max_occupancy = :max_occupancy";
+        $params = [":max_occupancy" => $max_occupancy];
+        $result = $this->getDatabase()->executeSQL($sql, $params);
+}
+
+public function changeOpeningTime($openingTime) {
+        $sql = "UPDATE restaurant
+        SET hours_open = :hours_open";
+        $params = [":hours_open" => $openingTime];
+        $result = $this->getDatabase()->executeSQL($sql, $params);
+}
+
+public function changeClosingTime($closingTime) {
+        $sql = "UPDATE restaurant
+        SET hours_closed = :hours_closed";
+        $params = [":hours_closed" => $closingTime];
+        $result = $this->getDatabase()->executeSQL($sql, $params);
+}
+
+public function changeTimeInterval($timeInterval) {
+        $sql = "UPDATE restaurant
+        SET timeInterval = :timeInterval";
+        $params = [":timeInterval" => $timeInterval];
+        $result = $this->getDatabase()->executeSQL($sql, $params);
+}
+
 
 }
