@@ -11,7 +11,7 @@
  * 
  */
 
-define('BASEPATH', '/kv6003/backend/');
+define('BASEPATH', '/backend/');
 
 define('DEVELOPMENT_MODE', true);
 define('SECRET_KEY', '&MY[5lx,xb#b""E/8eB&>x2}T^JDaV');

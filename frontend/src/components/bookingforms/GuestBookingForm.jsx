@@ -65,7 +65,7 @@ const onDayPress = (value) => {
     let formData = new FormData();
     formData.append('bookingDate', datevalue);
     formData.append('maxoccupancy', maxOccupancy);
-   axios.post('http://localhost/kv6003/backend/api/checktimeslots', formData)
+   axios.post('https://sliceboro.herokuapp.com/backend/api/checktimeslots', formData)
    .then(resp => {
       if (resp.data.results) {
       setAllTimeSlots(resp.data.results[0].bookingStart)
