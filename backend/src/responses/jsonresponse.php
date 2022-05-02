@@ -1,9 +1,6 @@
 <?php 
 
 namespace src\responses;
-
-
-
 /**
  * Response Class that deals specifically with JSON requests.
  * 

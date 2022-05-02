@@ -51,9 +51,6 @@ class AdminCustomers extends Controller {
                 $this->getGateway()->changeComment($userid, $comment);
         }
     }
-
-
-
         }
      else {
         $this->getResponse()->setMessage("Method not allowed");

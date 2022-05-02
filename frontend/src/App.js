@@ -32,7 +32,7 @@ const App = () => {
  const [userId, setUserId] = useState("");
  const [isAdmin, setAdmin] = useState("0");
  const [jwtToken, setJwtToken] = useState("0");
-  const [authenticated, setAuthenticated] = useState(false);  
+const [authenticated, setAuthenticated] = useState(false);  
 
   useEffect(() => {
 

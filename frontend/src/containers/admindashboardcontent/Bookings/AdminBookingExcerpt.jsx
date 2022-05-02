@@ -5,6 +5,7 @@ import { GrGroup} from 'react-icons/gr';
 import {BiPhone} from 'react-icons/bi'
 import { TokenContext } from '../../../App';
 import React from 'react'
+
 const BookingExcerpt = ({ booking }) => {
 
     var moment = require('moment'); 
@@ -19,8 +20,6 @@ const BookingExcerpt = ({ booking }) => {
         
       }
       
-
-
     let datevalue = moment(booking.bookingDate).format("DD/MM/YYYY");
     return (
         <article className="mx-auto p-6 sm:w-1/3 text-black bg-white rounded-lg border border-gray-200 shadow-md dark:bg-gray-800  mt-10">
@@ -54,7 +53,6 @@ const BookingExcerpt = ({ booking }) => {
             </p>  
             </div>
             </div>
-
             <div className="flex items-center pt-4 text-xl">
                 <div className="pr-3 text-2xl"> <AiOutlineMail/> </div>
                 <div>

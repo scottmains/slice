@@ -92,7 +92,7 @@ const [showModalClosingTimeUpdate, setShowModalClosingTimeUpdate] = React.useSta
 
   
   return (
-    <div className="min-h-screen text-black"> 
+    <div className="min-h-screen text-black pb-10"> 
     <AdminSidebar />
     <div className="relative md:pt-16 md:pb-32 flex content-center items-center justify-center ">
     <div className="bg-landing-background bg-cover bg-center absolute  top-0 w-full h-3/6 md:h-4/5   " />
@@ -165,7 +165,7 @@ const [showModalClosingTimeUpdate, setShowModalClosingTimeUpdate] = React.useSta
       </Listbox>
       </div>
       <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full w-3/5 mt-4" onClick={changeInterval}  >Change Interval</button>
-</div>
+</div >
 <div href="#" class="block  p-6 max-w-md bg-white rounded-lg border border-gray-200 shadow-md hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700">
 <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">Set Max Occupancy</h5>
 <p class="font-normal text-gray-700 dark:text-gray-400">Set the total amount of people that you can occupy in your restaurant at any given time slot.</p>
@@ -180,7 +180,7 @@ const [showModalClosingTimeUpdate, setShowModalClosingTimeUpdate] = React.useSta
 </div>
 </div>
 
-<div href="#" class="block mx-auto p-6 max-w-md bg-white rounded-lg border border-gray-200 shadow-md mt-4 hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700">
+<div href="#" className="block mx-auto p-6 max-w-md bg-white rounded-lg border border-gray-200 shadow-md mt-4 hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700">
 <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">Set Opening & Closing Hours</h5>
 <p class="font-normal text-gray-700 dark:text-gray-400">Set your standard opening and closing times. The closing time will be the final time people will be allowed to book.</p>
 <div className="pt-5 flex">
@@ -199,6 +199,8 @@ const [showModalClosingTimeUpdate, setShowModalClosingTimeUpdate] = React.useSta
             <button className="text-red-500 " onClick={() => setShowModalClosingTimeUpdate(true)}>Update</button>
             </div>
    </div>
+ 
+ 
 </div>
 {modalContent}
     </div>

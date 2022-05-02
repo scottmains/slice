@@ -48,7 +48,6 @@ const AdminBookings = () => {
 }
 
 let filteredResults = allBookings;
-
 if (allBookings) { 
 if ((filteredResults.length > 0) && (search !== undefined)) {
   filteredResults = filteredResults.filter(filterSearch) 
@@ -56,7 +55,6 @@ if ((filteredResults.length > 0) && (search !== undefined)) {
 }
 
 let content;
- 
 if (filteredResults) {
 content = filteredResults.map(booking => <AdminBookingExcerpt key={booking.bookingid} booking={booking} />)
 }

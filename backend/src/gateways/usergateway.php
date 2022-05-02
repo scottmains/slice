@@ -1,6 +1,11 @@
 <?php
 
 namespace src\gateways;
+use PHPMailer\PHPMailer\PHPMailer;
+use PHPMailer\PHPMailer\SMTP;
+use PHPMailer\PHPMailer\Exception;
+
+require 'vendor/autoload.php';
 
 
 /**
@@ -48,6 +53,58 @@ class UserGateway extends Gateway {
         $this->setResult($result);
     }
 
+    public function sendForgotPasswordEmail($email)
+    {
+        $this->sql = "SELECT userid, email from users where email= :email";
+        $params = ["email" => $email];
+        $result = $this->getDatabase()->querySQL($this->sql, $params);
+        $this->setResult($result);
+        if ($result) {
+        $user_email= $result["email"];
+        $user_id= $result["userid"];
+        //set expiration format
+        $token = openssl_random_pseudo_bytes(16);
+        $token = bin2hex($token);
+
+        $this->sql = "INSERT INTO password_reset_request (user_id, date_requested, token) VALUES (:user_id, :date_requested, :token)";
+        $params = [":user_id" => $user_id, ":date_requested" => date("Y-m-d H:i:s"), ":token" => $token];
+        $result2 = $this->getDatabase()->querySQL($this->sql, $params);
+
+        $passwordRequestId = $this->getDatabase()->lastInsert();
+
+        $verifyScript = 'http://localhost/kv6003/backend/resetpassword';
+        $linkToSend = $verifyScript . '?uid=' . $user_id . '&id=' . $passwordRequestId . '&t=' . $token;
+        
+        $mail = new PHPMailer(true);
+        try {
+        //$mail->SMTPDebug = 0;                     // enables SMTP debug information (for testing)
+        $mail->SMTPDebug = SMTP::DEBUG_SERVER;                      //Enable verbose debug output
+        $mail->isSMTP();                                            //Send using SMTP
+        $mail->Host       = 'smtp.gmail.com';                     //Set the SMTP server to send through
+        $mail->SMTPAuth   = true;                                   //Enable SMTP authentication
+        $mail->Username   = 'scottmains4@gmail.com';                     //SMTP username
+        $mail->Password   = 'Boffgoblin1';                               //SMTP password
+        $mail->SMTPSecure = PHPMailer::ENCRYPTION_SMTPS;            //Enable implicit TLS encryption
+        $mail->Port       = 465;               //replace values with yours
+ 
+
+        $mail->SetFrom('scottmains4@gmail.com', 'Organization'); //replace values with yours
+        $mail->AddAddress($email);
+ 
+        $mail->isHTML(true);                                  //Set email format to HTML
+        $mail->Subject = 'Reset your password for Slice';
+        $mail->Body    = 'Reset your password with the following link:'.$linkToSend.'"';
+        $mail->AltBody = 'This is the body in plain text for non-HTML mail clients';
+ 
+        $mail->send();
+    echo 'Message has been sent';
+        
+} catch (Exception $e) {
+    echo "Message could not be sent. Mailer Error: {$mail->ErrorInfo}";
+        }
+}
+}
+		
     public function findUserBooking($userid)
     {
         $this->sql = "SELECT users.userid, bookings.bookingid, bookings.bookingstart, bookings.bookingdate, bookings.dateBooked, bookings.partysize
@@ -66,7 +123,7 @@ class UserGateway extends Gateway {
         $params = [":email" => $email];
         $result = $this->getDatabase()->executeSQL($sql, $params);    
         if ($result) {
-                header("HTTP/1.1 400");
+            header("HTTP/1.1 404 Not Found");
         }
 }
 
@@ -91,31 +148,27 @@ public function checkEmailDoesntExist($email) {
         $result = $this->getDatabase()->executeSQL($sql, $params);
 }
 
-public function checkFields($input){
+public function checkFields($name, $phonenumber, $email, $password){
         
         //check if all required inputs have been entered
         try {
-          if(empty($input["password"])||empty($input["email"])||empty($input["passwordconfirm"])
-	  ||empty($input["fullname"])||empty($input["phonenumber"]));
+          if(empty($password)||empty($email)
+	  ||empty($name)||empty($phonenumber));
         } catch (Exception $e) {
                 return "You don't enter all required fields";
         }
           //check if the password inserted has at least 8 chars
-          if(!strlen($input['password'])>=8)
+          if(!strlen($password)>=8)
 		{
 			throw new Exception("The password chose MUST be at least of 8 character"); 
 		}
-          //check passwords matches
-        if(!($input['password'] == $input['passwordconfirm'])){ // == case sensitive comparison
-            throw new Exception("<p>The passwords don't match.</p>");	
-        }
          //check if the email address is valid
-		if(!filter_var($input['email'])|| strlen($input['email'])>30)
+		if(!filter_var($email)|| strlen($email)>30)
 		{
 			throw new Exception ("Invalid Email Address");
 		}
 
-                if (!filter_var($input['email'], FILTER_VALIDATE_EMAIL)) {
+                if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
                         throw new Exception ("Invalid Email Address");
                       } 
     }

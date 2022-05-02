@@ -57,6 +57,12 @@ switch ($request->getPath()) {
     case 'api/userdeletebooking':
         $controller = new Controller\UserDeleteBooking($request, $response);
         break;
+    case 'api/forgotpassword':
+        $controller = new Controller\ForgotPassword($request, $response);
+        break;
+    case 'resetpassword':
+        $controller = new Controller\ResetPasswordForm($request, $response);
+        break;
     default:
         if (substr($request->getPath(),0,3) === "api") {
         $controller = new Controller\ApiErrorController($request, $response);

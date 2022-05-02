@@ -24,6 +24,7 @@ function JSONexceptionHandler($e) {
         $output['File'] = $e->getFile();
         $output['Line'] = $e->getLine();
     }
+ 
 
     echo json_encode($output);
 }

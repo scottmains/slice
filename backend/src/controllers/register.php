@@ -31,20 +31,14 @@ class Register extends Controller {
 
             if ($this->getRequest()->getRequestMethod() === "POST") {
 
-                $input['password'] = filter_has_var(INPUT_POST, 'password') ? $_POST['password'] : null;
-                $input['email'] = filter_has_var(INPUT_POST, 'email') ? $_POST['email'] : null;
-                $input['name'] = filter_has_var(INPUT_POST, 'name') ? $_POST['name'] : null;
-                $input['phonenumber'] = filter_has_var(INPUT_POST, 'phonenumber') ? $_POST['phonenumber'] : null;
+                $email = $this->getRequest()->getParameter("email");
+                $password = $this->getRequest()->getParameter("password");
+                $name = $this->getRequest()->getParameter("name");
+                $phonenumber = $this->getRequest()->getParameter("phonenumber");
 
-                function trim_input($inputs){
-                    foreach($inputs as $key => $value){
-                        $inputs[$key] = trim($value);
-                    }
-                    return $inputs;
-                }
-                $input= trim_input($input);
-                
-                $this->getGateway()->addUser($input['name'], $input['phonenumber'], $input['email'], $input['password']);
+                $this->getGateway()->checkEmailExists($email); 
+                $this->getGateway()->checkFields($name, $phonenumber, $email, $password);
+                $this->getGateway()->addUser($name, $phonenumber, $email, $password);
             }
             else {
                 $this->getResponse()->setMessage("Method not allowed");

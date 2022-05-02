@@ -39,6 +39,9 @@ const SignUp = () => {
     const [errMsg, setErrMsg] = useState('');
     const [success, setSuccess] = useState(false);
     const [signUpContent, setSignUpContent] = useState(true);
+
+    const [forgotPasswordContent, setForgotPasswordContent] = useState(false);
+    const [successForgotPassword, setSuccessForgotPassword] = useState(false);
    
 
     useEffect(() => {
@@ -62,15 +65,11 @@ const SignUp = () => {
         setErrMsg('');
     }, [name, password, matchPwd])
 
- 
-
     const handleSubmit = async (e) => {
-      
         e.preventDefault();
-        // if button enabled with JS hack
+      
         const v1 = USER_REGEX.test(name);
         const v2 = PWD_REGEX.test(password);
-       
         if (!v1 || !v2) {
             setErrMsg("Invalid Entry");
             return;
@@ -81,9 +80,7 @@ const SignUp = () => {
           fd.append('phonenumber', phonenumber);
           fd.append('email', email);
           fd.append('password', password);
-
             const response = await axios.post('http://localhost/kv6003/backend/api/register', fd );
-   
             setSuccess(true);
             setSignUpContent(false);
             //clear state and controlled inputs
@@ -106,18 +103,78 @@ const SignUp = () => {
         }
     }
 
+    const submitForgotPassword = async (e) => {
+
+      e.preventDefault();
+      try {
+        const fd = new FormData();
+        fd.append('email', email);
+          const response = await axios.post('http://localhost/kv6003/backend/api/forgotpassword', fd );
+          setSuccessForgotPassword(true);
+      } catch (err) {
+          if (!err?.response) {
+              setErrMsg('No Server Response');
+          }
+              else {
+              setErrMsg('Registration Failed')
+          }
+          errRef.current.focus();
+      }
+
+    }
+
+    const handleForgotPassword= async (e) => {
+      setForgotPasswordContent(true);
+      setSignUpContent(false);
+    }
+
     let successContent;
 
     if (success) {
       successContent = (
-        <div className="min-h-full flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8 ">
-        <div className="max-w-md w-full space-y-8">
-          <h1 className="mt-6 text-center text-3xl font-extrabold text-gray-900">Success!</h1>
-        A confirmation email has just been sent to you!.
+     
+        <div className="text-center">
+          <h3 className="mt-6 text-center text-3xl font-extrabold text-gray-900">Success!</h3>
+       <p className="pt-4">  A confirmation email has just been sent to you! </p>
         </div>
-      </div>
+    
       )
     }
+
+    let forgotPassword;
+
+    if (forgotPasswordContent) {
+      forgotPassword = (
+        <>
+        <div className="min-h-full flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8 ">
+        <div className="max-w-md w-full space-y-8">
+        <p ref={errRef} className={errMsg ? "errmsg" : "offscreen" } aria-live="assertive">{errMsg}</p>
+          <h3 className="mt-6 text-center text-3xl font-extrabold text-gray-900">Please enter your email below: </h3>
+          <input className="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 
+              rounded-t-md focus:outline-none focus:ring-rose-500 focus:border-rose-500 
+              focus:z-10 sm:text-sm" type="text" id="email" ref={userRef} autoComplete="off" onChange={(e)=> setEmail(e.target.value)} value={email} required
+               aria-invalid={validEmail ? "false" : "true"} aria-describedby="uidnote" onFocus={() => setEmailFocus(true)} onBlur={() => setEmailFocus(false)} />
+        </div>
+      
+      </div>
+        <button onClick={submitForgotPassword} className="group relative w-1/3 m-auto flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-rose-600 hover:bg-rose-700 focus:outline-none focus:ring-2 focus:ring-offset-2
+         focus:ring-rose-500" disabled={!validEmail ? true : false}>
+        <span className="absolute left-0 inset-y-0 flex items-center pl-3"></span> Submit </button>
+        </>
+      )
+    }
+
+    let successForgotPasswordContent;
+
+    if (successForgotPassword) {
+
+      let successForgotPasswordContent = (
+        <div>
+          <p> Password Reset link has been emailed to you</p>
+        </div>
+      )
+    }
+
 
     let signUp;
 
@@ -190,6 +247,7 @@ const SignUp = () => {
             </div>
             <button type="submit" className="group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-rose-600 hover:bg-rose-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-rose-500" disabled={!validName || !validPwd || !validMatch ? true : false}>
               <span className="absolute left-0 inset-y-0 flex items-center pl-3"></span> Sign Up </button>
+              <button onClick={handleForgotPassword}> Forgot Password?</button>
           </form>
         </div>
       </div>
@@ -228,6 +286,8 @@ const SignUp = () => {
                 </div>
             {signUp}
             {successContent}
+            {forgotPassword}
+            {successForgotPasswordContent}
                 {/*footer*/}
                 <div className="flex items-center justify-end p-6  rounded-b">
                   <button
@@ -246,7 +306,7 @@ const SignUp = () => {
         </>
       ) : null}
 
-      {successContent}
+     
     </>
   )
 }

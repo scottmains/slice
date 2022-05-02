@@ -26,12 +26,9 @@ class Authenticate extends Controller {
 
     protected function processRequest() {
         $data = [];
-
         $email = $this->getRequest()->getParameter("email");
         $password = $this->getRequest()->getParameter("password");
         $userid = $this->getGateway()->findPassword($email);
-       
-
         if ($this->getRequest()->getRequestMethod() === "POST") {
             if(!is_null($email) && !is_null($password) ) {
                $this->getGateway()->findPassword($email);

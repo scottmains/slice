@@ -80,7 +80,6 @@ const errRef = useRef();
              setDate(datevalue);
              setDateShow(datevalueshow);
              setShowTime(true); 
-         
              let formData = new FormData();
              formData.append('bookingDate', datevalue);
              formData.append('maxoccupancy', maxOccupancy);
@@ -93,6 +92,7 @@ const errRef = useRef();
                }
           });
            }
+
            const checkRestaurant =  () => {
             axios.get('http://localhost/kv6003/backend/api/checkrestaurant')
             .then(resp => {
@@ -143,8 +143,7 @@ fetch(url, {   method: 'POST',
     });
   }
 
-  const Buttons =  (e) => {  
-
+  const GenerateTimeslots =  (e) => {  
    const toMinutes = str => str.split(":").reduce((h, m) => h * 60 + +m);
    function timeToMins(time) {
       var b = time.split(':');
@@ -167,7 +166,7 @@ fetch(url, {   method: 'POST',
    if (allTimeSlots) {
    const index = newTimeSlots.indexOf(allTimeSlots);
    if (index > -1) {
-     newTimeSlots.splice(index, 1); // 2nd parameter means remove one item only
+     newTimeSlots.splice(index, 1);
    }
    console.log(allTimeSlots)
    }
@@ -250,7 +249,7 @@ fetch(url, {   method: 'POST',
     minDate={new Date()}/> 
     <div className="flex justify-center">
        <div className="mb-3 pt-5 xl:w-96">
-         <Buttons/>
+         <GenerateTimeslots/>
        </div>
     </div>
     <div className="flex">
