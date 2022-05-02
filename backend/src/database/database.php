@@ -22,8 +22,8 @@ class Database
     }
 
     private function setDbConnection() {   
-            $this->dbConnection = new PDO("mysql:host=localhost;dbname=sliceboro",
-            "root", "");
+            $this->dbConnection = new PDO("mysql:host=localhost;dbname=unn_w18003567",
+            "unn_w18003567", "summer123");
             $this->dbConnection->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
      }
  
