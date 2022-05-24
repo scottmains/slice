@@ -2,7 +2,7 @@ import React, { useState, useRef, useEffect} from 'react';
 
 
 import Calendar from 'react-calendar'
-import 'react-calendar/dist/Calendar.css';
+import './Calendar.css';
 import { GrGroup} from 'react-icons/gr'; 
 import { AiOutlineCalendar, AiOutlineClockCircle, AiOutlinePhone, AiOutlineMail } from 'react-icons/ai'; 
 import {MdOutlinePersonOutline} from 'react-icons/md'

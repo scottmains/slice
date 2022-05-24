@@ -1,7 +1,7 @@
 import React, { useState, useRef, useEffect } from 'react';
 
 import Calendar from 'react-calendar'
-import 'react-calendar/dist/Calendar.css';
+import './Calendar.css';
 import { GrGroup} from 'react-icons/gr'; 
 import { AiOutlineCalendar, AiOutlineClockCircle  } from 'react-icons/ai'; 
 import H4 from '@material-tailwind/react/Heading4';
@@ -65,7 +65,7 @@ const onDayPress = (value) => {
     let formData = new FormData();
     formData.append('bookingDate', datevalue);
     formData.append('maxoccupancy', maxOccupancy);
-   axios.post('https://sliceboro.herokuapp.com/backend/api/checktimeslots', formData)
+   axios.post('http://localhost/kv6003/backend/api/checktimeslots', formData)
    .then(resp => {
       if (resp.data.results) {
       setAllTimeSlots(resp.data.results[0].bookingStart)
@@ -74,6 +74,8 @@ const onDayPress = (value) => {
       }
  });
   }
+
+
   const checkRestaurant =  () => {
    axios.get('http://localhost/kv6003/backend/api/checkrestaurant')
    .then(resp => {
@@ -173,7 +175,7 @@ return (
        <H4 className="card-title">Party Size</H4>
        <LeadText> Please select how many people will be attending: </LeadText>
        <div className="flex justify-center flex-col mx-auto">
-          <div className="mb-3 xl:w-96 mx-auto">
+          <div className="mb-3  w-full xl:w-96 mx-auto">
              <select className="form-select appearance-none
                 block
                 w-full

@@ -3,6 +3,7 @@ import axios from 'axios';
 import { AiOutlineCalendar, AiOutlineClockCircle, AiOutlinePhone, AiOutlineMail } from 'react-icons/ai'; 
 import { GrGroup} from 'react-icons/gr'; 
 import {BiPhone} from 'react-icons/bi'
+import {FaRegComment} from 'react-icons/fa'
 import { TokenContext } from '../../../App';
 import React from 'react'
 
@@ -19,6 +20,28 @@ const BookingExcerpt = ({ booking }) => {
                    fd);
         
       }
+
+      let comment;
+
+     if (booking.comment === "") {
+         comment = (
+        <></>
+         )
+        }
+         else {
+             comment = (
+                <div className="flex items-center pt-4 text-xl">
+                <div className="pr-3 text-2xl"> <FaRegComment/> </div>
+                <div>
+            <p className="postCredit">
+              {booking.comment} 
+            </p>  
+            </div>
+            </div>
+             )
+         }
+    
+     console.log(booking.comment)
       
     let datevalue = moment(booking.bookingDate).format("DD/MM/YYYY");
     return (
@@ -61,6 +84,7 @@ const BookingExcerpt = ({ booking }) => {
             </p>  
             </div>
             </div>
+            {comment}
 
           
             <div className="pt-4 pb-4"> 

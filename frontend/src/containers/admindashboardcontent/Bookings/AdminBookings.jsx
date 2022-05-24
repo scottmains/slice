@@ -18,6 +18,8 @@ const AdminBookings = () => {
   const [search, setSearch] = useState([]);
   let navigate = useNavigate();
 
+  console.log(allBookings)
+
   const isAdmin = React.useContext(AdminContext); 
 
   if (isAdmin === "0") {

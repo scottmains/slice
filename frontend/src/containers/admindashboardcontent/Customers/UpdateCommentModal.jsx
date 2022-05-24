@@ -6,6 +6,7 @@ const UpdateCommentModal = ({setShowModalCommentUpdate, userId}) => {
 
   const [commentUpdate, setCommentUpdate] = useState(null);
   const jwtToken = React.useContext(TokenContext);
+  
   const updateComment = async (e) => {
 
     const fd = new FormData();

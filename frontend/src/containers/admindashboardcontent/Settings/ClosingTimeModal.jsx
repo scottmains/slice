@@ -5,6 +5,7 @@ const UpdateClosingTimeModal = ({setShowModalClosingTimeUpdate}) => {
 
   const [closingTimeUpdate, setClosingTimeUpdate] = useState(null);
   const jwtToken = React.useContext(TokenContext); 
+  
   const updateClosingTime= async (e) => {
 
     const fd = new FormData();

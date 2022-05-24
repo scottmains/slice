@@ -3,18 +3,18 @@ import ReactDOM from 'react-dom'
 import App from './App'
 import './index.css'
 import 'tw-elements';
-import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import { HashRouter, Routes, Route } from 'react-router-dom';
 import { AuthProvider } from './context/AuthProvider';
 
 
 
 <React.StrictMode> 
 <AuthProvider>
-    <BrowserRouter>
+    <HashRouter>
         <Routes>
           <Route path="/*" element={<App />} />
         </Routes>
-    </BrowserRouter>
+    </HashRouter>
   </AuthProvider>
 </React.StrictMode>
 

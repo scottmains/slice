@@ -1,7 +1,5 @@
 import React from "react";
-import {AiOutlinePhone, AiOutlineMail } from 'react-icons/ai'; 
-import {RiMoneyCnyCircleLine} from 'react-icons/ri'
-import {FaRegCommentAlt} from 'react-icons/fa'
+import {AiOutlineMail } from 'react-icons/ai'; 
 
 const CustomerExcerpt = ({customer, setArray, array}) => {
  
@@ -14,11 +12,9 @@ const CustomerExcerpt = ({customer, setArray, array}) => {
         if (checked ) { 
         setArray((oldArray) => oldArray.concat(email))
         }
-      
         if(!checked) {
             setArray("")
         }
-      
       }
 
     return (

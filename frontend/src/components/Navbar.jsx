@@ -143,9 +143,9 @@ let navbar = (
                 <div className="hidden sm:block sm:ml-6">
                   <div className="flex space-x-4">
                     {navigation.map((item) => (
+                      <NavLink to={item.href}> 
                       <a
                         key={item.name}
-                        href={item.href}
                         className={classNames(
                           item.current ? '' : '',
                           'px-3 py-2 rounded-md text-lg font-large'
@@ -154,9 +154,10 @@ let navbar = (
                       >
                         {item.name}
                       </a>
+                      </NavLink>
                     ))}
                   </div>
-
+                  
                   
                 </div>
               </div>
@@ -172,6 +173,7 @@ let navbar = (
           <Disclosure.Panel className="sm:hidden">
             <div className="px-2 pt-2 pb-3 space-y-1">
               {navigation.map((item) => (
+           
                 <Disclosure.Button
                   key={item.name}
                   as="a"
@@ -182,14 +184,17 @@ let navbar = (
                   )}
                   aria-current={item.current ? 'page' : undefined}
                 >
+                    <NavLink to={item.href}>
                   {item.name}
+                  </NavLink>
                 </Disclosure.Button>
               ))}
             <div className="pr">
               <SignUp/>
-                <button type="button" className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none
-               focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-3 md:mr-0 dark:bg-blue-600
-                dark:hover:bg-blue-700 dark:focus:ring-blue-800">Login</button> 
+              
+              
+              <Login/>
+           
             </div>
             </div>
           </Disclosure.Panel>
@@ -227,9 +232,10 @@ if (authenticated) {
                 <div className="hidden sm:block sm:ml-6">
                   <div className="flex space-x-4">
                     {navigation.map((item) => (
+                    <NavLink to={item.href}> 
                       <a
                         key={item.name}
-                        href={item.href}
+                        
                         className={classNames(
                           item.current ? '' : '',
                           'px-3 py-2 rounded-md text-lg font-large'
@@ -238,6 +244,7 @@ if (authenticated) {
                       >
                         {item.name}
                       </a>
+                      </NavLink>
                     ))}
                   </div>
                 </div>
@@ -271,14 +278,16 @@ if (authenticated) {
                 <Disclosure.Button
                   key={item.name}
                   as="a"
-                  href={item.href}
+                
                   className={classNames(
                     item.current ? '' : '',
                     'block px-3 py-2 rounded-md text-lg font-large'
                   )}
                   aria-current={item.current ? 'page' : undefined}
                 >
+                <NavLink to={item.href}>
                   {item.name}
+                  </NavLink>
                 </Disclosure.Button>
               ))}
             </div>

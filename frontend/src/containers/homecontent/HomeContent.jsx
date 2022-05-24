@@ -1,7 +1,7 @@
 import React from 'react';
 import LocationModal from '../../components/LocationModal'
 import Fade from 'react-reveal/Fade';
-
+import { NavLink } from 'react-router-dom';
 import LeadText from '@material-tailwind/react/LeadText';
 
 
@@ -24,8 +24,9 @@ const HomeContent = () => {
                     <LocationModal/>
                     </div><Fade bottom duration={2500}> 
                     <div className="md:p-2">
-                    <a href="/book">  <button type="button" className="text-white w-2/3 bg-gray-800 hover:bg-gray-900 focus:outline-none focus:ring-4 focus:ring-gray-300 font-medium rounded-full text-sm px-5 py-2.5 mr-2 mb-2 
-                      dark:bg-gray-800 dark:hover:bg-gray-700 dark:focus:ring-gray-700 dark:border-gray-700">  BOOK A TABLE </button> </a> 
+                      <NavLink to="/book">
+                     <button type="button" className="text-white w-2/3 bg-gray-800 hover:bg-gray-900 focus:outline-none focus:ring-4 focus:ring-gray-300 font-medium rounded-full text-sm px-5 py-2.5 mr-2 mb-2 
+                      dark:bg-gray-800 dark:hover:bg-gray-700 dark:focus:ring-gray-700 dark:border-gray-700">  BOOK A TABLE </button>  </NavLink>
                     </div> </Fade>
                 </div>
                

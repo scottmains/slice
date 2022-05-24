@@ -41,11 +41,11 @@ const AdminMarketing= () => {
 
  
  function sendEmail(e) {
-  e.preventDefault();    //This is important, i'm not sure why, but the email won't send without it
+  e.preventDefault();   
 
   emailjs.sendForm('service_ytmor6y', 'template_4yfqmkb', form.current, 'n0hNc6QVCiskcoJ3Q')
     .then((result) => {
-        window.location.reload()  //This is if you still want the page to reload (since e.preventDefault() cancelled that behavior) 
+        window.location.reload()  
     }, (error) => {
         console.log(error.text);
     });

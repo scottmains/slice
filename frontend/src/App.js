@@ -58,7 +58,7 @@ const [authenticated, setAuthenticated] = useState(false);
 
   return (
 
-    <Router>
+    <Router >
      <ScrollToTop/>
       <>
       <TokenContext.Provider value ={jwtToken}> 
@@ -66,7 +66,7 @@ const [authenticated, setAuthenticated] = useState(false);
       <AuthContext.Provider value = {authenticated}>
       <UserContext.Provider value = {userId}>
       <Routes>
-        <Route exact path='/' index element={<SliceHome/>}/>
+        <Route path='/' index element={<SliceHome/>}/>
         <Route  path='/menu' element={<SliceMenu/>}/>
         <Route  path='/book' element={<SliceBooking/>}/>
         <Route  path='/guest-book' element={<GuestBookingForm/>}/>

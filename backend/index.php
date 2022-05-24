@@ -60,6 +60,9 @@ switch ($request->getPath()) {
     case 'api/forgotpassword':
         $controller = new Controller\ForgotPassword($request, $response);
         break;
+    case 'api/userprofile':
+        $controller = new Controller\UserProfile($request, $response);
+        break;
     case 'resetpassword':
         $controller = new Controller\ResetPasswordForm($request, $response);
         break;

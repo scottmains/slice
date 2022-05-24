@@ -52,9 +52,7 @@ const SignUp = () => {
         setValidEmail(EMAIL_REGEX.test(email));
     }, [email])
 
-    useEffect(() => {
-        setValidPhoneNumber(PHONENUMBER_REGEX.test(phonenumber));
-    }, [phonenumber])
+    
 
     useEffect(() => {
         setValidPwd(PWD_REGEX.test(password));
@@ -213,15 +211,12 @@ const SignUp = () => {
             </div>
             <div className="rounded-md shadow-sm -space-y-px">
               <label htmlFor="phoneNumber"> Phone Number:
-                <FontAwesomeIcon icon={faCheck} className={validPhoneNumber ? "valid" : "hide" } />
-                <FontAwesomeIcon icon={faTimes} className={validPhoneNumber || !phonenumber ? "hide" : "invalid" } />
+              
               </label>
               <input className="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-t-md focus:outline-none focus:ring-rose-500 focus:border-rose-500 focus:z-10 sm:text-sm"
-               type="text" id="phonenumber" ref={userRef} autoComplete="off" onChange={(e)=> setPhoneNumber(e.target.value)} value={phonenumber} 
-               required aria-invalid={validPhoneNumber? "false" : "true"} aria-describedby="uidnote" onFocus={() => setPhoneNumberFocus(true)} 
-               onBlur={() => setPhoneNumberFocus(false)} /> <p id="uidnote" className={PhoneNumberFocus && phonenumber && !validPhoneNumber ? "instructions" : "offscreen" }>
-                <FontAwesomeIcon icon={faInfoCircle} /> Must be a valid Phone Number <br />
-              </p>
+               type="text" id="phonenumber" ref={userRef} autoComplete="off" onChange={(e)=> setPhoneNumber(e.target.value)} value={phonenumber}/>
+              
+             
             </div>
             <div className="rounded-md shadow-sm -space-y-px">
               <label htmlFor="password"> Password:
@@ -247,7 +242,6 @@ const SignUp = () => {
             </div>
             <button type="submit" className="group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-rose-600 hover:bg-rose-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-rose-500" disabled={!validName || !validPwd || !validMatch ? true : false}>
               <span className="absolute left-0 inset-y-0 flex items-center pl-3"></span> Sign Up </button>
-              <button onClick={handleForgotPassword}> Forgot Password?</button>
           </form>
         </div>
       </div>

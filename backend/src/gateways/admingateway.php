@@ -21,12 +21,12 @@ public function __construct() {
 public function showAllBookings()
 {
         $this->sql = "  SELECT bookings.bookingid, bookings.userid, bookings.bookingStart, bookings.bookingDate, bookings.dateBooked, bookings.partysize,
-                        users.userid, users.name, users.phonenumber, users.email
+                        users.userid, users.name, users.phonenumber, users.email, users.comment
                         FROM bookings
                         JOIN users on (bookings.userid = users.userid) 
                         UNION 
                         SELECT bookings.bookingid, bookings.guestid, bookings.bookingStart, bookings.bookingDate, bookings.dateBooked, bookings.partysize,
-                        guest.guestid, guest.name, guest.phonenumber, guest.email
+                        guest.guestid, guest.name, guest.phonenumber, guest.email, guest.comment
                         FROM bookings
                         JOIN guest on (bookings.guestid = guest.guestid)
                         GROUP BY bookings.bookingid

@@ -34,7 +34,7 @@ useEffect(() => {
     setErrMsg('');
 }, [email, password])
 
-const handleSubmit = async (e) => {
+const handleSubmitLogin = async (e) => {
   e.preventDefault();
   try {
     const fd = new FormData();
@@ -67,7 +67,7 @@ const handleSubmit = async (e) => {
     <>
    
       <button
-        className="btn btn-primary"
+        className="btn btn-primary ml-3"
         type="button"
         onClick={() => setShowModal(true)}
       > 
@@ -95,7 +95,7 @@ const handleSubmit = async (e) => {
                   <H4 className="mt-6 text-center text-3xl font-extrabold text-gray-900 ">LOGIN</H4>
                </div>
                <p ref={errRef} className={errMsg ? "errmsg" : "offscreen" } aria-live="assertive">{errMsg}</p>
-               <form className="mt-8 space-y-6" onSubmit={handleSubmit}>
+               <form className="mt-8 space-y-6" onSubmit={handleSubmitLogin}>
                   <div className="rounded-md shadow-sm -space-y-px">
                      <label htmlFor="email">Email:</label>
                      <input className="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-t-md focus:outline-none focus:ring-rose-500 focus:border-rose-500 focus:z-10 sm:text-sm" 
@@ -123,6 +123,7 @@ const handleSubmit = async (e) => {
                      Sign in 
                   </button>
                </form>
+               
             </div>
          </div>
          {/*footer*/}
